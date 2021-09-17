@@ -5,7 +5,7 @@ drawFiboSeqEvolution();
 drawFiboSeqInfo();
 
 function drawFiboSeqEvolution() {
-  fetch("http://20.101.56.205:8080/api/betstrat/drawfiboseq/evolution")
+  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/evolution")
     .then(function(response) {
       return response.json();
     })
@@ -78,8 +78,8 @@ function drawFiboSeqInfo() {
       return response.json();
     })
     .then(function(myJson) {
-      $("#balance-stat").text("60.15€");
-      $("#success-stat").text(myJson.successRate+"%");
+      $("#balance-stat").text(myJson.balance + "€");
+      $("#success-stat").text(myJson.successRate + "%");
       $("#numteams-stat").text(myJson.numTeams);
       $("#nummatches-stat").text(myJson.numMatchesPlayed);
     })
