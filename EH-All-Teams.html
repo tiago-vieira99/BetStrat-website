@@ -7,13 +7,13 @@
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="page_type" content="np-template-header-footer-from-plugin">
-  <title>DF All Matches</title>
+  <title>EH All Teams</title>
   <link rel="stylesheet" href="nicepage.css" media="screen">
-  <link rel="stylesheet" href="css/DF-All-Matches.css" media="screen">
+  <link rel="stylesheet" href="css/DF-All-Teams.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="javascript/constants.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="javascript/DFAllMatches.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="javascript/EHTeamsScript.js" defer=""></script>
   <meta name="generator" content="Nicepage 3.24.3, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Federo:400">
@@ -27,7 +27,7 @@
     }
   </script>
   <meta name="theme-color" content="#478ac9">
-  <meta property="og:title" content="DF All Matches">
+  <meta property="og:title" content="EH All Teams">
   <meta property="og:description" content="">
   <meta property="og:type" content="website">
 </head>
@@ -89,35 +89,27 @@
   <section class="u-clearfix u-custom-color-6 u-section-1" id="carousel_c1f7">
     <div class="u-clearfix u-sheet u-sheet-1">
       <h2 class="u-text u-text-1">
-        <span style="font-size: 1.25rem; font-weight: 400;">draw fibonacci<br>
-        </span>List of all matches played
+        <span style="font-size: 1.125rem; font-weight: 400;">Euro Handicap</span>
+        <br>List of all Teams<br>
       </h2>
-      <div class="u-expanded-width u-table u-table-responsive u-table-1">
+      <div class="u-table u-table-responsive u-table-1">
         <table class="u-table-entity">
           <colgroup>
-            <col width="6.6%">
-            <col width="9.4%">
-            <col width="31.1%">
-            <col width="11.4%">
-            <col width="9.2%">
-            <col width="7.3%">
-            <col width="9.3%">
-            <col width="15.799999999999994%">
+            <col width="30.6%">
+            <col width="21%">
+            <col width="27.2%">
+            <col width="21.2%">
           </colgroup>
           <thead class="u-custom-font u-heading-font u-palette-4-dark-3 u-table-header u-table-header-1">
-            <tr style="height: 48px;">
-              <th class="u-table-cell">DELETE</th>
-              <th class="u-table-cell">Date</th>
-              <th class="u-table-cell">match</th>
-              <th class="u-table-cell">final result</th>
-              <th class="u-table-cell">odd</th>
-              <th class="u-table-cell">stake</th>
-              <th class="u-table-cell">seq level</th>
-              <th class="u-table-cell">update match</th>
+            <tr style="height: 70px;">
+              <th class="u-table-cell">TEAM</th>
+              <th class="u-table-cell">enable/disable</th>
+              <th class="u-table-cell">num matches played</th>
+              <th class="u-table-cell">balance</th>
             </tr>
           </thead>
-          <tbody class="u-table-alt-grey-15 u-table-body all-matches-table">
-        
+          <tbody id="teamsTable" class="u-table-alt-grey-15 u-table-body">
+            <!-- table rows added by jquery -->
           </tbody>
         </table>
       </div>

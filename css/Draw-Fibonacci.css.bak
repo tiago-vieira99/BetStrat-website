@@ -210,12 +210,12 @@
 }
 
 .u-section-3 .u-sheet-1 {
-  min-height: 414px;
+  min-height: 764px;
 }
 
 .u-section-3 .u-list-1 {
   width: 624px;
-  margin: 50px auto;
+  margin: 50px auto 60px;
 }
 
 .u-section-3 .u-repeater-1 {

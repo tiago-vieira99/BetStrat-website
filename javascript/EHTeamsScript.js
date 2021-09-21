@@ -3,7 +3,7 @@ getTeams();
 var teams;
 
 function getTeams() {
-  fetch("http://"+API_URL+"/api/betstrat/drawfiboseq/teams")
+  fetch("http://"+API_URL+"/api/betstrat/eurohandicap/teams")
     .then(function(response) {
       return response.json();
     })
@@ -65,7 +65,7 @@ function toggleConfirmation(tgBtn) {
 
 
 function updateTeamAPI(teamId, admin) {
-  var url = "http://" + API_URL + "/api/betstrat/drawfiboseq/" + teamId + "?admin=" + admin;
+  var url = "http://" + API_URL + "/api/betstrat/eurohandicap/" + teamId + "?admin=" + admin;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'

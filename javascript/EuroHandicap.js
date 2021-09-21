@@ -5,7 +5,7 @@ drawFiboSeqEvolution();
 drawFiboSeqInfo();
 
 function drawFiboSeqEvolution() {
-  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/evolution")
+  fetch("http://" + API_URL + "/api/betstrat/eurohandicap/evolution")
     .then(function(response) {
       return response.json();
     })
@@ -73,7 +73,7 @@ function chartSetup(days, profit) {
 
 
 function drawFiboSeqInfo() {
-  fetch("http://20.101.56.205:8080/api/betstrat/drawfiboseq")
+  fetch("http://20.101.56.205:8080/api/betstrat/eurohandicap")
     .then(function(response) {
       return response.json();
     })
