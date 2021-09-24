@@ -48,7 +48,7 @@ function getBtnId(elt) {
 }
 
 function updateMatchAPI(matchId, ftResult) {
-  var url = "http://" + API_URL + "/api/betstrat/drawfiboseq/match/" + matchId + "?ftResult=" + ftResult;
+  var url = "http://" + API_URL + "/api/betstrat/eurohandicap/match/" + matchId + "?ftResult=" + ftResult;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'
@@ -67,7 +67,7 @@ function updateMatchAPI(matchId, ftResult) {
 }
 
 function deleteMatchAPI(matchId) {
-  var url = "http://" + API_URL + "/api/betstrat/drawfiboseq/match/" + matchId;
+  var url = "http://" + API_URL + "/api/betstrat/eurohandicap/match/" + matchId;
 
   fetch(url, {
       method: 'DELETE', // or 'PUT'
@@ -86,7 +86,7 @@ function deleteMatchAPI(matchId) {
 }
 
 function info() {
-  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/matches")
+  fetch("http://" + API_URL + "/api/betstrat/eurohandicap/matches")
     .then(function(response) {
       return response.json();
     })

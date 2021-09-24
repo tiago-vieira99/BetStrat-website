@@ -18,7 +18,6 @@ function addBtnListeners() {
       var odd = document.querySelector('#insOdd' + matchId).value;
       var match = map1.get(matchId);
       match.drawOdds = odd;
-      alert("Stake: " + match.stake);
       httpPost(match);
     });
   }
@@ -40,6 +39,7 @@ function httpPost(match) {
       if (data.status) {
         alert(data.error + "\n" + data.message);
       } else {
+        alert("Stake: " + data.stake);
         console.log(data);
       }
     })

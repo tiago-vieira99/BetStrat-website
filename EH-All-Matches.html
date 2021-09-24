@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/EH-All-Matches.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="javascript/constants.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="javascript/EHAllMatches.js" defer=""></script>
   <meta name="generator" content="Nicepage 3.24.3, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Federo:400">
@@ -54,7 +56,7 @@
         <div class="u-custom-menu u-nav-container">
           <ul class="u-nav u-spacing-30 u-unstyled u-nav-1">
             <li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90"
-                href="Home.html" style="padding: 10px 0px;">Home</a>
+                href="index.html" style="padding: 10px 0px;">Home</a>
             </li>
             <li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90"
                 href="Draw-Fibonacci.html" style="padding: 10px 0px;">Draw Fibonacci</a>
@@ -69,7 +71,7 @@
             <div class="u-sidenav-overflow">
               <div class="u-menu-close"></div>
               <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 10px 0px;">Home</a>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="index.html" style="padding: 10px 0px;">Home</a>
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Draw-Fibonacci.html" style="padding: 10px 0px;">Draw Fibonacci</a>
                 </li>
@@ -90,99 +92,35 @@
         <span style="font-size: 1.25rem; font-weight: 400;">Euro Handicap<br>
         </span>List of all matches played
       </h2>
-      <a href="https://nicepage.com/c/blog-posts-website-mockup"
-        class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-palette-4-dark-3 u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-4-dark-2 u-btn-1">x</a>
       <div class="u-table u-table-responsive u-table-1">
         <table class="u-table-entity">
           <colgroup>
-            <col width="11.9%">
-            <col width="25.8%">
-            <col width="15.7%">
-            <col width="16%">
-            <col width="13.6%">
-            <col width="17%">
+            <col width="6.6%">
+            <col width="9.4%">
+            <col width="31.1%">
+            <col width="11.4%">
+            <col width="9.2%">
+            <col width="7.3%">
+            <col width="9.3%">
+            <col width="15.799999999999994%">
           </colgroup>
           <thead class="u-custom-font u-heading-font u-palette-4-dark-3 u-table-header u-table-header-1">
             <tr style="height: 48px;">
-              <th class="u-table-cell">date</th>
+              <th class="u-table-cell">DELETE</th>
+              <th class="u-table-cell">Date</th>
               <th class="u-table-cell">match</th>
               <th class="u-table-cell">final result</th>
               <th class="u-table-cell">odd</th>
               <th class="u-table-cell">stake</th>
-              <th class="u-table-cell">sequence level</th>
+              <th class="u-table-cell">seq level</th>
+              <th class="u-table-cell">update match</th>
             </tr>
           </thead>
-          <tbody class="u-table-alt-grey-15 u-table-body">
-            <tr style="height: 74px;">
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><input type="text" placeholder="odd"
-                  class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></td>
-
-
-              <!-- <div id="' + idMatch + '" style="margin: 15px 0px 40px;" class="u-clearfix u-custom-color-2 u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-gutter-0 u-layout-wrap u-layout-wrap-1">
-                <div class="u-gutter-0 u-layout">
-                  <div class="u-layout-row">
-                    <div class="u-align-left u-container-style u-layout-cell u-size-13 u-layout-cell-1">
-                      <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-1">
-                        <p class="u-align-center u-text u-text-grey-80 u-text-1">' + date + '</p>
-                      </div>
-                    </div>
-                    <div class="u-align-left u-container-style u-layout-cell u-size-27 u-layout-cell-2">
-                      <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-container-layout-2">
-                        <p class="u-align-center u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-grey-75 u-text-2">' + homeTeam + ' Vs ' + awayTeam + '</p>
-                      </div>
-                    </div>
-                    <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-3">
-                      <div class="u-container-layout u-valign-middle-md u-valign-top-sm u-valign-top-xs u-container-layout-3">
-                        <div class="u-align-center-sm u-align-center-xs u-form u-form-1">
-                          <form action="#" method="POST" class="u-clearfix u-form-horizontal u-form-spacing-9 u-inner-form" source="joomla" name="form" style="padding: 10px;">
-                            <div class="u-form-group"><label for="name-f32e" class="u-form-control-hidden u-label"></label><input type="text" placeholder="odd" id="insOdd' + idMatch + '" name="name"
-                                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></div>
-                            <div class="u-align-left u-form-group u-form-submit"><a class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-3 u-radius-50 u-btn-1 oddbtn">Insert</a></div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-            </tr>
-            <tr style="height: 74px;">
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">Item #1</td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">Description</td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">Description</td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">Description</td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">Description</td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-            </tr>
-            <tr style="height: 74px;">
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-            </tr>
-            <tr style="height: 74px;">
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-              <td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"></td>
-            </tr>
+          <tbody class="u-table-alt-grey-15 u-table-body all-matches-table">
+          
           </tbody>
         </table>
       </div>
-      <a href="https://nicepage.com/c/blog-posts-website-mockup"
-        class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-palette-4-dark-3 u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-4-dark-2 u-btn-2">x</a>
-      <a href="https://nicepage.com/c/blog-posts-website-mockup"
-        class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-palette-4-dark-3 u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-4-dark-2 u-btn-3">x</a>
-      <a href="https://nicepage.com/c/blog-posts-website-mockup"
-        class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-palette-4-dark-3 u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-4-dark-2 u-btn-4">x</a>
     </div>
   </section>
 
