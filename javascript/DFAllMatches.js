@@ -2,9 +2,30 @@ const map1 = new Map();
 var count = 0;
 info();
 var matches;
+var matchesArray = []
+// State
+// Number of products
+var numberOfItems = matchesArray.length
+const numberPerPage = 30
+const currentPage = 1
+// Number of pages
+var numberOfPages = 1;
+
 
 setTimeout(function() {
   addBtnListeners();
+
+  numberOfPages = Math.ceil(matchesArray.length / numberPerPage);
+
+  buildPage(1);
+  buildPagination(currentPage);
+
+  $('.paginator').on('click', 'button', function() {
+    var clickedPage = parseInt($(this).val())
+    buildPagination(clickedPage)
+    console.log(`Page clicked on ${clickedPage}`)
+    buildPage(clickedPage)
+  });
 }, 1000);
 
 
@@ -58,6 +79,7 @@ function updateMatchAPI(matchId, ftResult) {
       if (data.status) {
         alert(data.error + "\n" + data.message);
       } else {
+        alert("balance: " + data.balance);
         console.log(data);
       }
     })
@@ -106,7 +128,7 @@ function info() {
         addMatchLine(idMatch, match);
       });
 
-      console.log(map1);
+      console.log(map1.size);
 
     })
     .catch(function(error) {
@@ -115,16 +137,46 @@ function info() {
 }
 
 function addMatchLine(idMatch, match) {
-  $(document).ready(function() {
-    $('.all-matches-table').append(
-      '<tr id="'+idMatch+'" style="height: 74px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="deleteBtn" type=button value="❌" style="max-width:80%; position: center;"></form> </td> '+
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">'+match.date+'</td> '+
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell" style="text-align: center;"><b>'+match.homeTeam+"&nbsp &nbsp - &nbsp &nbsp"+match.awayTeam+'</b></td> '+
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">'+match.ftresult+'</td> '+
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">'+match.drawOdds+'</td> '+
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">'+match.stake+'</td> '+
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">'+match.seqLevel+'</td> '+
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <table>  <tr><td style="padding: 0px;"><input id="ftresult'+idMatch+'" type="text" placeholder="result" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></td> <td> <form><input class="updateBtn" type=button value="✔️" style="width:100%"></form></td> </tr></table></td> </tr>'
-    );
-  });
+  matchesArray.push('<tr id="' + idMatch + '" style="height: 74px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="deleteBtn" type=button value="❌" style="max-width:80%; position: center;"></form> </td> ' +
+    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.date + '</td> ' +
+    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell" style="text-align: center;"><b>' + match.homeTeam + "&nbsp &nbsp - &nbsp &nbsp" + match.awayTeam + '</b></td> ' +
+    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.ftresult + '</td> ' +
+    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.drawOdds + '</td> ' +
+    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.stake + '</td> ' +
+    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.seqLevel + '</td> ' +
+    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <table>  <tr><td style="padding: 0px;"><input id="ftresult' + idMatch + '" type="text" placeholder="result" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></td> <td> <form><input class="updateBtn" type=button value="✔️" style="width:100%"></form></td> </tr></table></td> </tr>');
+}
+
+
+function buildPage(currPage) {
+  const trimStart = (currPage - 1) * numberPerPage
+  const trimEnd = trimStart + numberPerPage
+  console.log(trimStart, trimEnd)
+  // console.log(matchesArray.slice(trimStart, trimEnd))
+  $('.all-matches-table').empty().append(matchesArray.slice(trimStart, trimEnd))
+  // $('.grid-uniform').empty().append(listArray.slice(trimStart, trimEnd));
+}
+
+function accomodatePage(clickedPage) {
+  if (clickedPage <= 1) {
+    return clickedPage + 1
+  }
+  if (clickedPage >= numberOfPages) {
+    return clickedPage - 1
+  }
+  return clickedPage
+}
+
+function buildPagination(clickedPage) {
+  $('.paginator').empty().append(`<p><i>Pages: </i></p>`)
+  const currPageNum = accomodatePage(clickedPage)
+  if (numberOfPages >= 3) {
+    for (let i = -1; i < 2; i++) {
+      $('.paginator').append(`<button class="btn btn-secondary" style="margin: 5px;" value="${currPageNum+i}">${currPageNum+i}</button>`)
+    }
+  } else {
+    for (let i = 0; i < numberOfPages; i++) {
+      $('.paginator').append(`<button class="btn btn-secondary" style="margin: 5px;" value="${i+1}">${i+1}</button>`)
+    }
+  }
 }
