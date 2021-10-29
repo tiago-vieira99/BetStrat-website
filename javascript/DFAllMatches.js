@@ -13,11 +13,11 @@ var numberOfPages = 1;
 
 
 setTimeout(function() {
-  addBtnListeners();
 
   numberOfPages = Math.ceil(matchesArray.length / numberPerPage);
 
   buildPage(1);
+  addBtnListeners();
   buildPagination(currentPage);
 
   $('.paginator').on('click', 'button', function() {

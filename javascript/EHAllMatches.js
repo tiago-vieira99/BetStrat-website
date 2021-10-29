@@ -12,11 +12,11 @@ const currentPage = 1
 var numberOfPages = 1;
 
 setTimeout(function() {
-  addBtnListeners();
 
   numberOfPages = Math.ceil(matchesArray.length / numberPerPage);
 
   buildPage(1);
+  addBtnListeners();
   buildPagination(currentPage);
 
   $('.paginator').on('click', 'button', function() {
@@ -68,6 +68,12 @@ function getBtnId(elt) {
 }
 
 function updateMatchAPI(matchId, ftResult) {
+  if (ftResult.includes('+')) {
+    ftResult = ftResult.replace('+', '%2B');
+  } else if (ftResult.includes('-')) {
+    ftResult = ftResult.replace('-', '%2D');
+  }
+
   var url = "http://" + API_URL + "/api/betstrat/eurohandicap/match/" + matchId + "?ftResult=" + ftResult;
 
   fetch(url, {
