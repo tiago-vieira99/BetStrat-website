@@ -121,8 +121,11 @@ function info() {
       matches = resp;
 
       matches.sort(function(a, b) {
-        var dateA = a.id,
-          dateB = b.id;
+        var matchDateA = a.date.split('/');
+        var matchDateB = b.date.split('/');
+
+        var dateA = Date.parse(matchDateA[1].concat('/',matchDateA[0],'/',matchDateA[2])),
+          dateB = Date.parse(matchDateB[1].concat('/',matchDateB[0],'/',matchDateB[2]))
         if (dateA > dateB) return -1;
         if (dateA < dateB) return 1;
         return 0;

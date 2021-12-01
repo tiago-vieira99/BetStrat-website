@@ -1,3 +1,9 @@
+
+var urlArgs = location.search.substring(1).split('&');
+var teamId = urlArgs[0].substring(4);
+
+$('.teamNameTitle').append(decodeURIComponent(urlArgs[1]));
+
 const map1 = new Map();
 var count = 0;
 info();
@@ -109,7 +115,7 @@ function deleteMatchAPI(matchId) {
 }
 
 function info() {
-  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/matches")
+  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/teammatches/" + teamId)
     .then(function(response) {
       return response.json();
     })
