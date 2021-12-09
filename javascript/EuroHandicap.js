@@ -19,6 +19,20 @@ function drawFiboSeqEvolution() {
     });
 }
 
+function drawFiboSeqEvolutionBySeason(season) {
+  fetch("http://" + API_URL + "/api/betstrat/eurohandicap/evolution/" + season)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(myJson) {
+      x = myJson.x;
+      y = myJson.y;
+      chart = new Chart(context, chartSetup(x, y));
+    })
+    .catch(function(error) {
+      console.log("Error: " + error);
+    });
+}
 
 function chartSetup(days, profit) {
   var data = {
@@ -70,7 +84,16 @@ function chartSetup(days, profit) {
 
 // ---------------------------------------------------------------------------------------------------------
 
-
+document.getElementById("seasonSelect").addEventListener("change",function() {
+  const season = this.value;
+  if (season == "all") {
+    chart.destroy();
+    drawFiboSeqEvolution();
+  } else {
+    chart.destroy();
+    drawFiboSeqEvolutionBySeason(season);
+  }
+})
 
 function drawFiboSeqInfo() {
   fetch("http://" + API_URL + "/api/betstrat/eurohandicap")

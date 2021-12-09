@@ -25,7 +25,7 @@ function getTeams() {
         } else {
           admin = "";
         }
-        addTeamToTable("team" + team.id, team.name, team.numMatchesPlayed, team.balance, admin, team.oddAvg);
+        addTeamToTable("team" + team.id, team.name, team.numMatchesPlayed, team.balance, admin, team.oddAvg, team.season);
       });
 
     })
@@ -35,10 +35,10 @@ function getTeams() {
 }
 
 
-function addTeamToTable(idTeam, name, numMatches, balance, admin, oddAvg) {
+function addTeamToTable(idTeam, name, numMatches, balance, admin, oddAvg, season) {
   $(document).ready(function() {
     $('#teamsTable').append(
-        '<tr style="height: 64px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black;" href="Matches-By-Team.html?'+idTeam+'&'+name+'"><u>' + name + '</u></a></td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + idTeam + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + numMatches + '</td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + oddAvg + '</td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + balance + '</td></tr>'
+        '<tr style="height: 64px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black;" href="Matches-By-Team.html?'+idTeam+'&'+name+'"><u>' + name + '</u></a></td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + idTeam + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + numMatches + '</td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + season + '</td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + oddAvg + '</td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + balance + '</td></tr>'
     );
   });
 }
