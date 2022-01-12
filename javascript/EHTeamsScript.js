@@ -95,6 +95,29 @@ function toggleConfirmation(tgBtn) {
   }
 }
 
+function insertTeam() {
+    name = document.querySelector('#name-6797').value;
+    teamUrl = document.querySelector('#url-6797').value;
+    season = document.querySelector('#teamSeason').value;
+    var url = new URL("http://" + API_URL + "/api/betstrat/eurohandicap/team?name=name&url=url&season=season");
+    url.searchParams.set('name', name);
+    url.searchParams.set('url', teamUrl);
+    url.searchParams.set('season', season);
+    fetch(url, {
+        method: 'POST', // or 'PUT'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status) {
+          alert(data.error + "\n" + data.message);
+        } else {
+          alert(data.name + " inserted!");
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+}
 
 function updateTeamAPI(teamId, admin) {
   var url = "http://" + API_URL + "/api/betstrat/eurohandicap/" + teamId + "?admin=" + admin;
