@@ -17,7 +17,7 @@ function addBtnListeners() {
       var matchId = getBtnId(this);
       var odd = document.querySelector('#insOdd' + matchId).value;
       var match = map1.get(matchId);
-      match.drawOdds = odd;
+      match.odd = odd;
       alert("Stake: " + match.stake);
       httpPost(match);
     });
@@ -26,7 +26,7 @@ function addBtnListeners() {
 
 
 function httpPost(match) {
-  var url = "http://" + API_URL + "/api/betstrat/drawfiboseq/match"
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/match"
 
   fetch(url, {
       method: 'POST', // or 'PUT'
@@ -59,7 +59,7 @@ function getBtnId(elt) {
 
 
 function info() {
-  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/nextmatches")
+  fetch("http://" + API_URL + "/api/betstrat/onlydraws/nextmatches")
     .then(function(response) {
       return response.json();
     })

@@ -34,7 +34,7 @@ function getBtnId(elt) {
 }
 
 function getTeams() {
-  fetch("http://"+API_URL+"/api/betstrat/drawfiboseq/teams")
+  fetch("http://"+API_URL+"/api/betstrat/onlydraws/teams")
     .then(function(response) {
       return response.json();
     })
@@ -56,7 +56,7 @@ function getTeams() {
         } else {
           admin = "";
         }
-        addTeamToTable("team" + team.id, team.name, team.numMatchesPlayed, team.balance, admin, team.oddAvg, team.season);
+        addTeamToTable("team" + team.id, team.name, team.numMatchesPlayed, team.balance, admin, team.oddAvg, team.season, team.initialStake);
       });
 
     })
@@ -66,11 +66,18 @@ function getTeams() {
 }
 
 
-function addTeamToTable(idTeam, name, numMatches, balance, admin, oddAvg, season) {
+function addTeamToTable(idTeam, name, numMatches, balance, admin, oddAvg, season, initialStake) {
   $(document).ready(function() {
     $('#teamsTable').append(
-      '<tr id="' + idTeam + '" style="height: 64px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black;" href="Matches-By-Team.html?'+idTeam+'&'+name+'"><u>' + name + '</u></a></td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + idTeam + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + numMatches + '</td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + season + '</td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + oddAvg + '</td><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + balance + '</td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="archiveBtn" type=button value="📜" style="max-width:80%; position: center;"></form> </td></tr>'
+      '<tr id="' + idTeam + '" style="height: 64px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black;" href="Matches-By-Team.html?'+idTeam+'&'+name+'"><u>' + name + '</u></a></td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + idTeam + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + numMatches + '</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + season + '</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + oddAvg + '</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + balance + '</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + initialStake + '</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <table>  <tr><td style="padding: 0px;"><input id="stake' + idTeam + '" type="text" placeholder="stake" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></td> <td> <form><input class="updateStakeBtn" type=button value="✔️" style="width:100%"></form></td> </tr></table></td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="archiveBtn" type=button value="📜" style="max-width:100%; position: center;"></form> </td></tr>'
     );
   });
 }
@@ -99,7 +106,7 @@ function insertTeam() {
     name = document.querySelector('#name-6797').value;
     teamUrl = document.querySelector('#url-6797').value;
     season = document.querySelector('#teamSeason').value;
-    var url = new URL("http://" + API_URL + "/api/betstrat/drawfiboseq/team?name=name&url=url&season=season");
+    var url = new URL("http://" + API_URL + "/api/betstrat/onlydraws/team?name=name&url=url&season=season");
     url.searchParams.set('name', name);
     url.searchParams.set('url', teamUrl);
     url.searchParams.set('season', season);
@@ -120,7 +127,7 @@ function insertTeam() {
 }
 
 function updateTeamAPI(teamId, admin) {
-  var url = "http://" + API_URL + "/api/betstrat/drawfiboseq/" + teamId + "?admin=" + admin;
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/" + teamId + "?admin=" + admin;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'
@@ -139,7 +146,7 @@ function updateTeamAPI(teamId, admin) {
 }
 
 function archiveTeamAPI(teamId) {
-  var url = "http://" + API_URL + "/api/betstrat/drawfiboseq/team/archive" + teamId;
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/team/archive" + teamId;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'

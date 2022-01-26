@@ -17,7 +17,7 @@ function addBtnListeners() {
       var matchId = getBtnId(this);
       var odd = document.querySelector('#insOdd' + matchId).value;
       var match = map1.get(matchId);
-      match.drawOdds = odd;
+      match.odd = odd;
       httpPost(match);
     });
   }
