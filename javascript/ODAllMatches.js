@@ -6,7 +6,7 @@ var matchesArray = []
 // State
 // Number of products
 var numberOfItems = matchesArray.length
-const numberPerPage = 30
+const numberPerPage = 50
 const currentPage = 1
 // Number of pages
 var numberOfPages = 1;

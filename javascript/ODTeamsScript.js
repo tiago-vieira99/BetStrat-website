@@ -8,6 +8,7 @@ setTimeout(function() {
 
 function addBtnListeners() {
   var allarchiveButtons = document.querySelectorAll('.archiveBtn');
+  var allUpdateStakeButtons = document.querySelectorAll('.updateStakeBtn');
 
   console.log("length: " + allarchiveButtons.length);
   for (var i = 0; i < allarchiveButtons.length; i++) {
@@ -15,6 +16,16 @@ function addBtnListeners() {
       if (archiveConfirmation(this)) {
         var teamId = getBtnId(this).substr(4);
         archiveTeamAPI(teamId);
+      }
+    });
+  }
+
+  for (var j = 0; j < allUpdateStakeButtons.length; j++) {
+    allUpdateStakeButtons[j].addEventListener('click', function() {
+      var teamId = getBtnId(this);
+      var newStake = document.querySelector('#stake' + teamId).value;
+      if (archiveConfirmation(this)) {
+        updateTeamStake(teamId, newStake);
       }
     });
   }
@@ -94,7 +105,7 @@ function toggleConfirmation(tgBtn) {
   var retVal = confirm("Do you want to continue ?");
   if (retVal == true) {
     // document.write ("User wants to continue!");
-    updateTeamAPI(tgBtn.id, tgBtn.checked);
+    updateTeamAdminAPI(tgBtn.id, tgBtn.checked);
     return tgBtn.checked;
   } else {
     // document.write ("User does not want to continue!");
@@ -106,10 +117,24 @@ function insertTeam() {
     name = document.querySelector('#name-6797').value;
     teamUrl = document.querySelector('#url-6797').value;
     season = document.querySelector('#teamSeason').value;
-    var url = new URL("http://" + API_URL + "/api/betstrat/onlydraws/team?name=name&url=url&season=season");
-    url.searchParams.set('name', name);
-    url.searchParams.set('url', teamUrl);
-    url.searchParams.set('season', season);
+    stake = document.querySelector('#stake-6797').value;
+    var url = null;
+
+    if (stake != '') {
+      url = new URL("http://" + API_URL + "/api/betstrat/onlydraws/team?name=name&url=url&season=season&initialStake=initialStake");
+      url.searchParams.set('name', name);
+      url.searchParams.set('url', teamUrl);
+      url.searchParams.set('season', season);
+      url.searchParams.set('initialStake', stake);
+      console.log(url);
+    } else {
+      url = new URL("http://" + API_URL + "/api/betstrat/onlydraws/team?name=name&url=url&season=season");
+      url.searchParams.set('name', name);
+      url.searchParams.set('url', teamUrl);
+      url.searchParams.set('season', season);
+      console.log(url);
+    }
+    
     fetch(url, {
         method: 'POST', // or 'PUT'
       })
@@ -126,8 +151,27 @@ function insertTeam() {
       });
 }
 
-function updateTeamAPI(teamId, admin) {
+function updateTeamAdminAPI(teamId, admin) {
   var url = "http://" + API_URL + "/api/betstrat/onlydraws/" + teamId + "?admin=" + admin;
+
+  fetch(url, {
+      method: 'PUT', // or 'PUT'
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status) {
+        alert(data.error + "\n" + data.message);
+      } else {
+        console.log(data);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+function updateTeamStake(teamId, stake) {
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/" + teamId + "?initial_stake=" + stake;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'
