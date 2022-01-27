@@ -5,7 +5,7 @@ drawFiboSeqEvolution();
 drawFiboSeqInfo();
 
 function drawFiboSeqEvolution() {
-  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/evolution")
+  fetch("http://" + API_URL + "/api/betstrat/onlydraws/evolution")
     .then(function(response) {
       return response.json();
     })
@@ -20,7 +20,7 @@ function drawFiboSeqEvolution() {
 }
 
 function drawFiboSeqEvolutionBySeason(season) {
-  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/evolution/" + season)
+  fetch("http://" + API_URL + "/api/betstrat/onlydraws/evolution/" + season)
     .then(function(response) {
       return response.json();
     })
@@ -97,7 +97,7 @@ document.getElementById("seasonSelect").addEventListener("change",function() {
 
 
 function drawFiboSeqInfo() {
-  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq")
+  fetch("http://" + API_URL + "/api/betstrat/onlydraws")
     .then(function(response) {
       return response.json();
     })

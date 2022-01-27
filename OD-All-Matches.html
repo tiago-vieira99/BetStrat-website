@@ -7,18 +7,21 @@
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="page_type" content="np-template-header-footer-from-plugin">
-  <title>DF All Teams</title>
+  <title>DF All Matches</title>
   <link rel="stylesheet" href="nicepage.css" media="screen">
-  <link rel="stylesheet" href="css/DF-All-Teams.css" media="screen">
+  <link rel="stylesheet" href="css/All-Matches.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="javascript/constants.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="javascript/DFTeamsScript.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="javascript/ODAllMatches.js" defer=""></script>
   <meta name="generator" content="Nicepage 3.24.3, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Federo:400">
-
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -27,7 +30,7 @@
     }
   </script>
   <meta name="theme-color" content="#478ac9">
-  <meta property="og:title" content="DF All Teams">
+  <meta property="og:title" content="DF All Matches">
   <meta property="og:description" content="">
   <meta property="og:type" content="website">
 </head>
@@ -59,7 +62,7 @@
                 href="index.html" style="padding: 10px 0px;">Home</a>
             </li>
             <li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90"
-                href="Draw-Fibonacci.html" style="padding: 10px 0px;">Draw Fibonacci</a>
+                href="Only-Draws.html" style="padding: 10px 0px;">Only Draws</a>
             </li>
             <li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90"
                 href="Euro-Handicap.html" style="padding: 10px 0px;">Euro Handicap</a>
@@ -73,7 +76,7 @@
               <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="index.html" style="padding: 10px 0px;">Home</a>
                 </li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Draw-Fibonacci.html" style="padding: 10px 0px;">Draw Fibonacci</a>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Only-Draws.html" style="padding: 10px 0px;">Only Draws</a>
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Euro-Handicap.html" style="padding: 10px 0px;">Euro Handicap</a>
                 </li>
@@ -89,36 +92,43 @@
   <section class="u-clearfix u-custom-color-6 u-section-1" id="carousel_c1f7">
     <div class="u-clearfix u-sheet u-sheet-1">
       <h2 class="u-text u-text-1">
-        <span style="font-size: 1.125rem; font-weight: 400;">Draw fibonacci</span>
-        <br>List of all Teams<br>
+        <span style="font-size: 1.25rem; font-weight: 400;">Only Draws<br>
+        </span>List of all matches played
       </h2>
-      <div class="u-table u-table-responsive u-table-1">
+      <div class="u-expanded-width u-table u-table-responsive u-table-1">
         <table class="u-table-entity">
           <colgroup>
-            <col width="30.6%">
-            <col width="21%">
-            <col width="27.2%">
-            <col width="21.2%">
+            <col width="6.6%">
+            <col width="9.4%">
+            <col width="31.1%">
+            <col width="11.4%">
+            <col width="9.2%">
+            <col width="7.3%">
+            <col width="9.3%">
+            <col width="15.799999999999994%">
           </colgroup>
           <thead class="u-custom-font u-heading-font u-palette-4-dark-3 u-table-header u-table-header-1">
-            <tr style="height: 70px;">
-              <th class="u-table-cell">TEAM</th>
-              <th class="u-table-cell">enable/disable</th>
-              <th class="u-table-cell">matches played</th>
-              <th class="u-table-cell">season</th>
-              <th class="u-table-cell">odd average</th>
-              <th class="u-table-cell">balance</th>
-              <th class="u-table-cell">archive</th>
+            <tr style="height: 48px;">
+              <th class="u-table-cell">DELETE</th>
+              <th class="u-table-cell">Date</th>
+              <th class="u-table-cell">match</th>
+              <th class="u-table-cell">final result</th>
+              <th class="u-table-cell">odd</th>
+              <th class="u-table-cell">stake</th>
+              <th class="u-table-cell">seq level</th>
+              <th class="u-table-cell">update match</th>
             </tr>
           </thead>
-          <tbody id="teamsTable" class="u-table-alt-grey-15 u-table-body">
-            <!-- table rows added by jquery -->
+          <tbody class="u-table-alt-grey-15 u-table-body all-matches-table">
+
           </tbody>
         </table>
       </div>
+      <div class="paginator" style="margin: 40px; display: flex; justify-content: center;"> </div>
     </div>
-  </section>
 
+
+  </section>
 
   <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-8a43">
     <!-- <div class="u-clearfix u-sheet u-sheet-1">

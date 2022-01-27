@@ -75,7 +75,7 @@ function getBtnId(elt) {
 }
 
 function updateMatchAPI(matchId, ftResult) {
-  var url = "http://" + API_URL + "/api/betstrat/drawfiboseq/match/" + matchId + "?ftResult=" + ftResult;
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/match/" + matchId + "?ftResult=" + ftResult;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'
@@ -96,7 +96,7 @@ function updateMatchAPI(matchId, ftResult) {
 }
 
 function deleteMatchAPI(matchId) {
-  var url = "http://" + API_URL + "/api/betstrat/drawfiboseq/match/" + matchId;
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/match/" + matchId;
 
   fetch(url, {
       method: 'DELETE', // or 'PUT'
@@ -115,7 +115,7 @@ function deleteMatchAPI(matchId) {
 }
 
 function info() {
-  fetch("http://" + API_URL + "/api/betstrat/drawfiboseq/teammatches/" + teamId)
+  fetch("http://" + API_URL + "/api/betstrat/onlydraws/teammatches/" + teamId)
     .then(function(response) {
       return response.json();
     })
@@ -151,7 +151,7 @@ function addMatchLine(idMatch, match) {
     '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.date + '</td> ' +
     '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell" style="text-align: center;"><b>' + match.homeTeam + "&nbsp &nbsp - &nbsp &nbsp" + match.awayTeam + '</b></td> ' +
     '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.ftresult + '</td> ' +
-    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.drawOdds + '</td> ' +
+    '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.odd + '</td> ' +
     '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.stake + '</td> ' +
     '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + match.seqLevel + '</td> ' +
     '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <table>  <tr><td style="padding: 0px;"><input id="ftresult' + idMatch + '" type="text" placeholder="result" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></td> <td> <form><input class="updateBtn" type=button value="✔️" style="width:100%"></form></td> </tr></table></td> </tr>');

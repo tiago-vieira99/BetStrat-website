@@ -45,7 +45,7 @@ function getBtnId(elt) {
 }
 
 function getTeams() {
-  fetch("http://"+API_URL+"/api/betstrat/eurohandicap/teams")
+  fetch("http://"+API_URL+"/api/betstrat/onlydraws/teams")
     .then(function(response) {
       return response.json();
     })
@@ -105,7 +105,7 @@ function toggleConfirmation(tgBtn) {
   var retVal = confirm("Do you want to continue ?");
   if (retVal == true) {
     // document.write ("User wants to continue!");
-    updateTeamAPI(tgBtn.id, tgBtn.checked);
+    updateTeamAdminAPI(tgBtn.id, tgBtn.checked);
     return tgBtn.checked;
   } else {
     // document.write ("User does not want to continue!");
@@ -121,14 +121,14 @@ function insertTeam() {
     var url = null;
 
     if (stake != '') {
-      url = new URL("http://" + API_URL + "/api/betstrat/eurohandicap/team?name=name&url=url&season=season&initialStake=initialStake");
+      url = new URL("http://" + API_URL + "/api/betstrat/onlydraws/team?name=name&url=url&season=season&initialStake=initialStake");
       url.searchParams.set('name', name);
       url.searchParams.set('url', teamUrl);
       url.searchParams.set('season', season);
       url.searchParams.set('initialStake', stake);
       console.log(url);
     } else {
-      url = new URL("http://" + API_URL + "/api/betstrat/eurohandicap/team?name=name&url=url&season=season");
+      url = new URL("http://" + API_URL + "/api/betstrat/onlydraws/team?name=name&url=url&season=season");
       url.searchParams.set('name', name);
       url.searchParams.set('url', teamUrl);
       url.searchParams.set('season', season);
@@ -151,8 +151,8 @@ function insertTeam() {
       });
 }
 
-function updateTeamAPI(teamId, admin) {
-  var url = "http://" + API_URL + "/api/betstrat/eurohandicap/" + teamId + "?admin=" + admin;
+function updateTeamAdminAPI(teamId, admin) {
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/" + teamId + "?admin=" + admin;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'
@@ -171,7 +171,7 @@ function updateTeamAPI(teamId, admin) {
 }
 
 function updateTeamStake(teamId, stake) {
-  var url = "http://" + API_URL + "/api/betstrat/eurohandicap/" + teamId + "?initial_stake=" + stake;
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/" + teamId + "?initial_stake=" + stake;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'
@@ -190,7 +190,7 @@ function updateTeamStake(teamId, stake) {
 }
 
 function archiveTeamAPI(teamId) {
-  var url = "http://" + API_URL + "/api/betstrat/eurohandicap/team/archive" + teamId;
+  var url = "http://" + API_URL + "/api/betstrat/onlydraws/team/archive" + teamId;
 
   fetch(url, {
       method: 'PUT', // or 'PUT'
