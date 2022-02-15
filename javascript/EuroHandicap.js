@@ -34,6 +34,15 @@ function drawFiboSeqEvolutionBySeason(season) {
     });
 }
 
+function syncData() {
+  var url = "http://" + API_URL + "/api/betstrat/eurohandicap/sync";
+
+  fetch(url, {
+      method: 'POST'
+    });
+    setTimeout(() => { window.location.reload(); }, 2000);
+}
+
 function chartSetup(days, profit) {
   var data = {
     type: 'line',
