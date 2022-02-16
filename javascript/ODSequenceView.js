@@ -22,10 +22,10 @@ function getTeams() {
         var admin;
         if (team.admin) {
           admin = "checked";
+          addTeamToTable("team" + team.id, team.name, team.seqLevel);
         } else {
           admin = "";
         }
-        addTeamToTable("team" + team.id, team.name, team.seqLevel);
       });
 
     })
