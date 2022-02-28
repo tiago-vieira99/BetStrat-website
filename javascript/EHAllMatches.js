@@ -146,7 +146,7 @@ function info() {
 
 function addMatchLine(idMatch, match) {
   matchesArray.push(
-      '<tr id="'+idMatch+'" style="height: 74px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="deleteBtn" type=button value="❌" style="max-width:80%; position: center;"></form> </td> '+
+      '<tr id="'+idMatch+'" style="height: 74px; background-color: '+matchBackgroundColor(match)+';"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="deleteBtn" type=button value="❌" style="max-width:80%; position: center;"></form> </td> '+
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">'+match.date+'</td> '+
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell" style="text-align: center;"><b>'+match.homeTeam+"&nbsp &nbsp - &nbsp &nbsp"+match.awayTeam+'</b></td> '+
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">'+match.ftresult+'</td> '+
@@ -155,6 +155,14 @@ function addMatchLine(idMatch, match) {
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">'+match.seqLevel+'</td> '+
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <table>  <tr><td style="padding: 0px;"><input id="ftresult'+idMatch+'" type="text" placeholder="result" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></td> <td> <form><input class="updateBtn" type=button value="✔️" style="width:100%"></form></td> </tr></table></td> </tr>'
     );
+}
+
+function matchBackgroundColor(match) {
+  if (match.ftresult == '+1' || match.ftresult == '+2') {
+    return '#afdfbd'
+  } else {
+    return '#e3c0c1'
+  }
 }
 
 function buildPage(currPage) {
