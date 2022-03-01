@@ -153,10 +153,14 @@ function addMatchLine(idMatch, match) {
 
 
 function matchBackgroundColor(match) {
-  if (match.ftresult == 'X') {
-    return '#afdfbd'
+  if (match.ftresult != null) {
+    if (match.ftresult == 'X') {
+      return '#afdfbd'
+    } else {
+      return '#e3c0c1'
+    }
   } else {
-    return '#e3c0c1'
+    return '#e5f6f0'
   }
 }
 
