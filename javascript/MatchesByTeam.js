@@ -7,6 +7,7 @@ $('.teamNameTitle').append(decodeURIComponent(urlArgs[1]));
 const map1 = new Map();
 var count = 0;
 info();
+getTeamInfo();
 var matches;
 var matchesArray = []
 // State
@@ -34,6 +35,27 @@ setTimeout(function() {
   });
 }, 1000);
 
+function getTeamInfo() {
+  fetch("http://" + API_URL + "/api/betstrat/onlydraws/team/" + teamId)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(resp) {
+      team = resp;
+
+      var b = document.querySelector(".teamDataSheet");
+
+      if (team.strategyID == ONLY_DRAWS_ID) {
+        b.setAttribute("src", OD_DATA_SHEET_URL + "?gid=" + team.analysisID + "&single=true&range=B5:L14&widget=true&headers=false");
+      } else if (team.strategyID == EURO_HANDICAP_ID) {
+        b.setAttribute("src", EH_DATA_SHEET_URL + "?gid=" + team.analysisID + "&single=true&range=B5:L14&widget=true&headers=false");
+      }
+    
+    })
+    .catch(function(error) {
+      console.log("Error: " + error);
+    });
+}
 
 function addBtnListeners() {
   var allUpdateButtons = document.querySelectorAll('.updateBtn');
