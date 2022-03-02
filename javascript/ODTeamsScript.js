@@ -81,7 +81,7 @@ function addTeamToTable(idTeam, team, admin) {
   $(document).ready(function() {
     $('#teamsTable').append(
       '<tr id="' + idTeam + '" style="height: 64px; background-color: '+teamBackgroundColor(team.balance)+';"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black; font-weight: bold;" href="TeamInfoPage.html?'+idTeam+'&'+team.name+'"><u>' + team.name + '</u></a></td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + team.idTeam + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + idTeam + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td>' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell" style="' + checkLeftMatchesToPlayColor(team.numMatchesToPlay, team.name) +'">' + team.numMatchesPlayed + ' / ' + team.numMatchesToPlay + '</td>' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.season + '</td>' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.oddAvg + '</td>' +
