@@ -38,7 +38,7 @@ function getTeams() {
 function addTeamToTable(idTeam, name, seqLevel) {
   $(document).ready(function() {
     $('#teamsTable').append(
-      '<tr id="' + idTeam + '" style="height: 64px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black;" href="Matches-By-Team.html?'+idTeam+'&'+name+'"><u>' + name + '</u></a></td>' +
+      '<tr id="' + idTeam + '" style="height: 64px;"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black;" href="TeamInfoPage.html?'+idTeam+'&'+name+'"><u>' + name + '</u></a></td>' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + buildEmojisString(seqLevel) + '</td></tr>'
     );
   });
