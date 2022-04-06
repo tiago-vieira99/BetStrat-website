@@ -78,24 +78,39 @@ function getTeams() {
 
 
 function addTeamToTable(idTeam, team, admin) {
-  $(document).ready(function() {
-    $('#teamsTable').append(
-      '<tr id="' + idTeam + '" style="height: 64px; background-color: '+teamBackgroundColor(team.balance)+';"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black; font-weight: bold;" href="TeamInfoPage.html?'+idTeam+'&'+team.name+'"><u>' + team.name + '</u></a></td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + idTeam + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell" style="' + checkLeftMatchesToPlayColor(team.numMatchesToPlay, team.name) +'">' + team.numMatchesPlayed + ' / ' + team.numMatchesToPlay + '</td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.season + '</td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.oddAvg + '</td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.balance + '</td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.initialStake + '</td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <table>  <tr><td style="padding: 0px;"><input id="stake' + idTeam + '" type="text" placeholder="stake" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></td> <td> <form><input class="updateStakeBtn" type=button value="✔️" style="width:100%"></form></td> </tr></table></td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="archiveBtn" type=button value="📜" style="max-width:100%; position: center;"></form> </td></tr>'
-    );
-  });
+  if (team.name.includes("_")) {
+    $(document).ready(function() {
+      $('#archTeamsTable').append(
+        '<tr id="' + idTeam + '" style="height: 64px; background-color: '+teamBackgroundColor(team.balance)+';"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black; font-weight: bold;" href="TeamInfoPage.html?'+idTeam+'&'+team.name+'"><u>' + team.name + '</u></a></td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell" style="' + checkLeftMatchesToPlayColor(team.numMatchesToPlay, team.name, team.admin) +'">' + team.numMatchesPlayed + ' / ' + team.numMatchesToPlay + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.season + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.oddAvg + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.balance + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.initialStake + '</td></tr>'
+      );
+    });
+  } else {
+    $(document).ready(function() {
+      $('#teamsTable').append(
+        '<tr id="' + idTeam + '" style="height: 64px; background-color: '+teamBackgroundColor(team.balance)+';"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><a style="color: black; font-weight: bold;" href="TeamInfoPage.html?'+idTeam+'&'+team.name+'"><u>' + team.name + '</u></a></td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + idTeam + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell" style="' + checkLeftMatchesToPlayColor(team.numMatchesToPlay, team.name, team.admin) +'">' + team.numMatchesPlayed + ' / ' + team.numMatchesToPlay + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.season + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.oddAvg + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.balance + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.initialStake + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <table>  <tr><td style="padding: 0px;"><input id="stake' + idTeam + '" type="text" placeholder="goal" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" required="required"></td> <td> <form><input class="updateStakeBtn" type=button value="✔️" style="width:100%"></form></td> </tr></table></td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="archiveBtn" type=button value="📜" style="max-width:100%; position: center;"></form> </td></tr>'
+      );
+    });
+  }
 }
 
-function checkLeftMatchesToPlayColor(matchesLeft, name) {
-  if (matchesLeft <= 7 && !name.includes("_")) {
-    return 'background-color: #e1e10c;'
+function checkLeftMatchesToPlayColor(matchesLeft, name, admin) {
+  if (admin) {
+    if (matchesLeft <= 7 && !name.includes("_")) {
+      return 'background-color: #e1e10c;'
+    }
   }
   return ''
 }
