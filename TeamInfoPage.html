@@ -10,6 +10,8 @@
   <title class="teamNameTitle">All Matches :: </title>
   <link rel="stylesheet" href="nicepage.css" media="screen">
   <link rel="stylesheet" href="css/All-Matches.css" media="screen">
+  <link rel="stylesheet" href="css/TeamInfoPage.css" media="screen">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script class="u-script" type="text/javascript" src="javascript/constants.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="javascript/MatchesByTeam.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
@@ -111,10 +113,31 @@
         </span>
       </h2>
       <span style="font-size: 60px;" onclick="history.back()"><b>&#60;</b></span>
-      <iframe class="u-expanded-width teamDataSheet" height="280" frameborder="0" scrolling="no"
+      <button type="button" class="collapsible" style = "margin-top: 50px; overflow: hidden;">Show Historic Data Analysis</button>
+      <div class="content">
+        <iframe class="u-expanded-width teamDataSheet" height="280" frameborder="0" scrolling="no"
         src=""
-        style = "margin-top: 50px; overflow: hidden;">
+        >
       </iframe>
+      </div>
+      <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        </script>
+
+      <canvas id="graphTeam" style="max-width:60%; max-height:20%; background-color: white; width: 70%; margin: 50px auto;"></canvas>
 
       <div class="u-expanded-width u-table u-table-responsive u-table-1">
         <table class="u-table-entity">

@@ -1,6 +1,7 @@
 
 var urlArgs = location.search.substring(1).split('&');
 var teamId = urlArgs[0].substring(4);
+var context = document.querySelector('#graphTeam').getContext('2d');
 
 $('.teamNameTitle').append(decodeURIComponent(urlArgs[1]));
 
@@ -144,6 +145,25 @@ function info() {
     .then(function(resp) {
       matches = resp;
 
+      var matchesBalanceArray = [];
+      var matchesDateArray = [];
+      var barsBackgroundColorArray = [];
+      var barsBorderColorArray = [];
+      
+      matches.forEach(function(match) {
+        matchesBalanceArray.push(match.balance);
+        matchesDateArray.push(match.date);
+        if (match.balance > 0) {
+          barsBackgroundColorArray.push("#afdfbd");
+          barsBorderColorArray.push("#58F031");
+        } else {
+          barsBackgroundColorArray.push("#e3c0c1");
+          barsBorderColorArray.push("#E46F73");
+        }
+      });
+
+      var chart = new Chart(context, chartSetup(matchesDateArray, matchesBalanceArray, barsBackgroundColorArray, barsBorderColorArray));
+
       matches.sort(function(a, b) {
         var matchDateA = a.date.split('/');
         var matchDateB = b.date.split('/');
@@ -154,6 +174,7 @@ function info() {
         if (dateA < dateB) return 1;
         return 0;
       });
+      
       matches.forEach(function(match) {
         var idMatch = "idmatch" + count++;
         map1.set(idMatch, match);
@@ -166,6 +187,51 @@ function info() {
     .catch(function(error) {
       console.log("Error: " + error);
     });
+}
+
+function chartSetup(matchesDateArray, matchesBalanceArray, barsBackgroundColorArray, barsBorderColorArray) {
+  var data = {
+    type: 'bar',
+    data: {
+      labels: matchesDateArray,
+      datasets: [{
+        backgroundColor: barsBackgroundColorArray,
+        borderColor: barsBorderColorArray,
+        borderWidth: 1,
+        data: matchesBalanceArray,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        filler: {
+          propagate: false,
+        },
+        legend: {
+          position: 'top',
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Matches History',
+          font: {
+            size: 20
+          },
+        }
+      },
+      scales: {
+        y: {
+          stacked: true,
+          title: {
+            display: true,
+            text: 'Balance (€)'
+          }
+        }
+      }
+    },
+  };
+  return data;
 }
 
 function addMatchLine(idMatch, match) {
