@@ -145,6 +145,25 @@ function info() {
     .then(function(resp) {
       matches = resp;
 
+      matches.sort(function(a, b) {
+        var matchDateA = a.date.split('/');
+        var matchDateB = b.date.split('/');
+
+        var dateA = Date.parse(matchDateA[1].concat('/',matchDateA[0],'/',matchDateA[2])),
+          dateB = Date.parse(matchDateB[1].concat('/',matchDateB[0],'/',matchDateB[2]))
+        if (dateA > dateB) { return -1; }
+        if (dateA < dateB) { return 1; }
+        return 0;
+      });
+
+      matches.forEach(function(match) {
+        var idMatch = "idmatch" + count++;
+        map1.set(idMatch, match);
+        addMatchLine(idMatch, match);
+      });
+
+      matches.reverse();
+
       var matchesBalanceArray = [];
       var matchesDateArray = [];
       var barsBackgroundColorArray = [];
@@ -163,25 +182,6 @@ function info() {
       });
 
       var chart = new Chart(context, chartSetup(matchesDateArray, matchesBalanceArray, barsBackgroundColorArray, barsBorderColorArray));
-
-      matches.sort(function(a, b) {
-        var matchDateA = a.date.split('/');
-        var matchDateB = b.date.split('/');
-
-        var dateA = Date.parse(matchDateA[1].concat('/',matchDateA[0],'/',matchDateA[2])),
-          dateB = Date.parse(matchDateB[1].concat('/',matchDateB[0],'/',matchDateB[2]))
-        if (dateA > dateB) return -1;
-        if (dateA < dateB) return 1;
-        return 0;
-      });
-      
-      matches.forEach(function(match) {
-        var idMatch = "idmatch" + count++;
-        map1.set(idMatch, match);
-        addMatchLine(idMatch, match);
-      });
-
-      console.log(map1.size);
 
     })
     .catch(function(error) {
