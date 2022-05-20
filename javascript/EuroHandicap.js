@@ -22,6 +22,7 @@ function drawFiboSeqEvolution() {
 function drawFiboSeqEvolutionBySeason(season) {
   fetch("http://" + API_URL + "/api/betstrat/eurohandicap/evolution/" + season)
     .then(function(response) {
+      statsInfoBySeason(season);
       return response.json();
     })
     .then(function(myJson) {
@@ -29,6 +30,62 @@ function drawFiboSeqEvolutionBySeason(season) {
       y = myJson.y;
       chart = new Chart(context, chartSetup(x, y));
     })
+    .catch(function(error) {
+      console.log("Error: " + error);
+    });
+}
+
+function statsInfoBySeason(season) {
+  fetch("http://" + API_URL + "/api/betstrat/eurohandicap/teams/")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(resp){
+      var allTeams = resp.teams;
+      var filteredTeams = [];
+      var greenTeams = 0;
+      var totalBalance = 0;
+
+      allTeams.forEach(function(team) {
+        if (team.season == season) {
+          filteredTeams.push(team);
+          totalBalance = totalBalance + team.balance;
+
+          if (team.balance > 0) {
+            greenTeams++;
+          }
+        }
+      });
+
+      numMatchesBySeason(season);
+      var successRate = (greenTeams / filteredTeams.length)*100;
+      setTimeout(function() {
+        $("#balance-stat").text(totalBalance.toString().slice(0, 5) + "€");
+        $("#numteams-stat").text(filteredTeams.length);
+        $("#success-stat").text(successRate.toString().slice(0, 5) + "%");
+      }, 720);
+    }) 
+    .catch(function(error) {
+      console.log("Error: " + error);
+    });
+}
+
+function numMatchesBySeason(season) {
+  fetch("http://" + API_URL + "/api/betstrat/eurohandicap/matches/")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(resp){
+      var allMatches = resp;
+      var filteredMatches = [];
+
+      allMatches.forEach(function(match) {
+        if (match.season == season) {
+          filteredMatches.push(match);
+        }
+      });
+      $("#nummatches-stat").text(filteredMatches.length);
+    }) 
     .catch(function(error) {
       console.log("Error: " + error);
     });
@@ -97,6 +154,7 @@ document.getElementById("seasonSelect").addEventListener("change",function() {
   const season = this.value;
   if (season == "all") {
     chart.destroy();
+    drawFiboSeqInfo();
     drawFiboSeqEvolution();
   } else {
     chart.destroy();
