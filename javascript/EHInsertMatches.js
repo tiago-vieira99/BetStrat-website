@@ -39,7 +39,7 @@ function httpPost(match) {
       if (data.status) {
         alert(data.error + "\n" + data.message);
       } else {
-        alert("Stake: " + data.stake);
+        alert("Stake: " + data.stake + "\nSeqLevel: " + data.seqLevel);
         console.log(data);
       }
     })
