@@ -1,6 +1,13 @@
+var strategyPath = "";
+if (ONLY_DRAWS_ID == currentStrategy) {
+    strategyPath = ONLY_DRAWS_PATH;
+} else if (EURO_HANDICAP_ID == currentStrategy) {
+    strategyPath = EURO_HANDICAP_PATH;
+}
+
 const map1 = new Map();
 var count = 0;
-info();
+callGetAllMatchesInfo(strategyPath);
 var matches;
 var matchesArray = []
 // State
@@ -26,7 +33,7 @@ setTimeout(function() {
     console.log(`Page clicked on ${clickedPage}`)
     buildPage(clickedPage)
   });
-}, 1000);
+}, 1500);
 
 
 function addBtnListeners() {
@@ -40,7 +47,7 @@ function addBtnListeners() {
       var matchId = getBtnId(this);
       var result = document.querySelector('#ftresult' + matchId).value;
       var match = map1.get(matchId); //only accept on null FTresult matches
-      updateMatchAPI(match.id, result);
+      callPutUpdateMatch(strategyPath, match.id, result);
     });
   }
 
@@ -49,7 +56,7 @@ function addBtnListeners() {
       if (deleteConfirmation(this)) {
         var matchId = getBtnId(this);
         var match = map1.get(matchId);
-        deleteMatchAPI(match.id);
+        callDeleteMatch(strategyPath, match.id);
       }
     });
   }
@@ -68,77 +75,6 @@ function getBtnId(elt) {
     return elt.id;
 }
 
-function updateMatchAPI(matchId, ftResult) {
-  var url = "http://" + API_URL + "/api/betstrat/onlydraws/match/" + matchId + "?ftResult=" + ftResult;
-
-  fetch(url, {
-      method: 'PUT', // or 'PUT'
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(url);
-      if (data.status) {
-        alert(data.error + "\n" + data.message);
-      } else {
-        alert("balance: " + data.balance);
-        console.log(data);
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
-
-function deleteMatchAPI(matchId) {
-  var url = "http://" + API_URL + "/api/betstrat/onlydraws/match/" + matchId;
-
-  fetch(url, {
-      method: 'DELETE', // or 'PUT'
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status) {
-        alert(data.error + "\n" + data.message);
-      } else {
-        console.log(data);
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
-
-function info() {
-  fetch("http://" + API_URL + "/api/betstrat/onlydraws/matches")
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(resp) {
-      matches = resp;
-
-      matches.sort(function(a, b) {
-        var matchDateA = a.date.split('/');
-        var matchDateB = b.date.split('/');
-
-        var dateA = Date.parse(matchDateA[1].concat('/',matchDateA[0],'/',matchDateA[2])),
-          dateB = Date.parse(matchDateB[1].concat('/',matchDateB[0],'/',matchDateB[2]))
-        if (dateA > dateB) return -1;
-        if (dateA < dateB) return 1;
-        return 0;
-      });
-      matches.forEach(function(match) {
-        var idMatch = "idmatch" + count++;
-        map1.set(idMatch, match);
-        addMatchLine(idMatch, match);
-      });
-
-      console.log(map1.size);
-
-    })
-    .catch(function(error) {
-      console.log("Error: " + error);
-    });
-}
 
 function addMatchLine(idMatch, match) {
   matchesArray.push('<tr id="' + idMatch + '" style="height: 74px; background-color: '+matchBackgroundColor(match)+';"><td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"> <form><input class="deleteBtn" type=button value="❌" style="max-width:80%; position: center;"></form> </td> ' +

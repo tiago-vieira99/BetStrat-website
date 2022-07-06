@@ -1,6 +1,13 @@
+var strategyPath = "";
+if (ONLY_DRAWS_ID == currentStrategy) {
+    strategyPath = ONLY_DRAWS_PATH;
+} else if (EURO_HANDICAP_ID == currentStrategy) {
+    strategyPath = EURO_HANDICAP_PATH;
+}
+
 const map1 = new Map();
 var count = 0;
-info();
+callGetNextMatches(strategyPath);
 var matches;
 
 
@@ -18,34 +25,9 @@ function addBtnListeners() {
       var odd = document.querySelector('#insOdd' + matchId).value;
       var match = map1.get(matchId);
       match.odd = odd;
-      httpPost(match);
+      callPostNewMatch(strategyPath, match);
     });
   }
-}
-
-
-function httpPost(match) {
-  var url = "http://" + API_URL + "/api/betstrat/eurohandicap/match"
-
-  fetch(url, {
-      method: 'POST', // or 'PUT'
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(match),
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status) {
-        alert(data.error + "\n" + data.message);
-      } else {
-        alert("Stake: " + data.stake + "\nSeqLevel: " + data.seqLevel);
-        console.log(data);
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
 }
 
 
@@ -55,34 +37,6 @@ function getBtnId(elt) {
     elt = elt.parentNode;
   if (elt) // Check we found a DIV with an ID
     return elt.id;
-}
-
-
-function info() {
-  fetch("http://" + API_URL + "/api/betstrat/eurohandicap/nextmatches")
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(resp) {
-      matches = resp;
-
-      matches.sort(function(a, b) {
-        var dateA = a.date,
-          dateB = b.date;
-        if (dateA < dateB) return -1;
-        if (dateA > dateB) return 1;
-        return 0;
-      });
-      matches.forEach(function(match) {
-        var idMatch = "idmatch" + count++;
-        map1.set(idMatch, match);
-        addMatchDiv(idMatch, match.date, match.homeTeam, match.awayTeam);
-      });
-
-    })
-    .catch(function(error) {
-      console.log("Error: " + error);
-    });
 }
 
 

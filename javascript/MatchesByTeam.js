@@ -7,7 +7,7 @@ $('.teamNameTitle').append(decodeURIComponent(urlArgs[1]));
 
 const map1 = new Map();
 var count = 0;
-info();
+getMatchesForTeam();
 getTeamInfo();
 var matches;
 var matchesArray = []
@@ -36,27 +36,6 @@ setTimeout(function() {
   });
 }, 1000);
 
-function getTeamInfo() {
-  fetch("http://" + API_URL + "/api/betstrat/onlydraws/team/" + teamId)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(resp) {
-      team = resp;
-
-      var b = document.querySelector(".teamDataSheet");
-
-      if (team.strategyID == ONLY_DRAWS_ID) {
-        b.setAttribute("src", OD_DATA_SHEET_URL + "?gid=" + team.analysisID + "&single=true&range=B5:L14&widget=true&headers=false");
-      } else if (team.strategyID == EURO_HANDICAP_ID) {
-        b.setAttribute("src", EH_DATA_SHEET_URL + "?gid=" + team.analysisID + "&single=true&range=B5:L14&widget=true&headers=false");
-      }
-    
-    })
-    .catch(function(error) {
-      console.log("Error: " + error);
-    });
-}
 
 function addBtnListeners() {
   var allUpdateButtons = document.querySelectorAll('.updateBtn');
@@ -69,7 +48,7 @@ function addBtnListeners() {
       var matchId = getBtnId(this);
       var result = document.querySelector('#ftresult' + matchId).value;
       var match = map1.get(matchId); //only accept on null FTresult matches
-      updateMatchAPI(match.id, result);
+      callPutUpdateMatch(ONLY_DRAWS_PATH, match.id, result);
     });
   }
 
@@ -78,7 +57,7 @@ function addBtnListeners() {
       if (deleteConfirmation(this)) {
         var matchId = getBtnId(this);
         var match = map1.get(matchId);
-        deleteMatchAPI(match.id);
+        callDeleteMatch(ONLY_DRAWS_PATH, match.id);
       }
     });
   }
@@ -97,97 +76,6 @@ function getBtnId(elt) {
     return elt.id;
 }
 
-function updateMatchAPI(matchId, ftResult) {
-  var url = "http://" + API_URL + "/api/betstrat/onlydraws/match/" + matchId + "?ftResult=" + ftResult;
-
-  fetch(url, {
-      method: 'PUT', // or 'PUT'
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(url);
-      if (data.status) {
-        alert(data.error + "\n" + data.message);
-      } else {
-        alert("balance: " + data.balance);
-        console.log(data);
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
-
-function deleteMatchAPI(matchId) {
-  var url = "http://" + API_URL + "/api/betstrat/onlydraws/match/" + matchId;
-
-  fetch(url, {
-      method: 'DELETE', // or 'PUT'
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status) {
-        alert(data.error + "\n" + data.message);
-      } else {
-        console.log(data);
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
-
-function info() {
-  fetch("http://" + API_URL + "/api/betstrat/onlydraws/teammatches/" + teamId)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(resp) {
-      matches = resp;
-
-      matches.sort(function(a, b) {
-        var matchDateA = a.date.split('/');
-        var matchDateB = b.date.split('/');
-
-        var dateA = Date.parse(matchDateA[1].concat('/',matchDateA[0],'/',matchDateA[2])),
-          dateB = Date.parse(matchDateB[1].concat('/',matchDateB[0],'/',matchDateB[2]))
-        if (dateA > dateB) { return -1; }
-        if (dateA < dateB) { return 1; }
-        return 0;
-      });
-
-      matches.forEach(function(match) {
-        var idMatch = "idmatch" + count++;
-        map1.set(idMatch, match);
-        addMatchLine(idMatch, match);
-      });
-
-      matches.reverse();
-
-      var matchesBalanceArray = [];
-      var matchesDateArray = [];
-      var barsBackgroundColorArray = [];
-      var barsBorderColorArray = [];
-      
-      matches.forEach(function(match) {
-        matchesBalanceArray.push(match.balance);
-        matchesDateArray.push(match.date);
-        if (match.balance > 0) {
-          barsBackgroundColorArray.push("#afdfbd");
-          barsBorderColorArray.push("#58F031");
-        } else {
-          barsBackgroundColorArray.push("#e3c0c1");
-          barsBorderColorArray.push("#E46F73");
-        }
-      });
-
-      var chart = new Chart(context, chartSetup(matchesDateArray, matchesBalanceArray, barsBackgroundColorArray, barsBorderColorArray));
-
-    })
-    .catch(function(error) {
-      console.log("Error: " + error);
-    });
-}
 
 function chartSetup(matchesDateArray, matchesBalanceArray, barsBackgroundColorArray, barsBorderColorArray) {
   var data = {
