@@ -18,7 +18,7 @@ setTimeout(function() {
 
 function addBtnListeners() {
   var allButtons = document.querySelectorAll('.oddbtn');
-  console.log("length: " + allButtons.length);
+  console.log("lengthfsd: " + allButtons.length);
   for (var i = 0; i < allButtons.length; i++) {
     allButtons[i].addEventListener('click', function() {
       var matchId = getBtnId(this);

@@ -143,6 +143,6 @@ function insertTeam() {
     url.searchParams.set('url', teamUrl);
     url.searchParams.set('analysisID', analysisId);
     url.searchParams.set('season', season);
-    console.log(url);
+    callInsertNewTeam(url);
 }
 

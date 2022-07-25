@@ -208,9 +208,9 @@ function callGetTeams(stratPath) {
         } else {
           admin = "";
         }
-        setTimeout(function() {
-          getFirstMatchForTeam(team, admin);          
-        }, 1000);
+        
+        getFirstMatchForTeam(team, admin);          
+        
       });
 
     })
@@ -365,9 +365,9 @@ function getTeamInfo() {
       var b = document.querySelector(".teamDataSheet");
 
       if (team.strategyID == ONLY_DRAWS_ID) {
-        b.setAttribute("src", OD_DATA_SHEET_URL + "?gid=" + team.analysisID + "&single=true&range=B5:L14&widget=true&headers=false");
+        b.setAttribute("src", OD_DATA_SHEET_URL + "?gid=" + team.analysisID + "&single=true&range=B5:N14&widget=true&headers=false");
       } else if (team.strategyID == EURO_HANDICAP_ID) {
-        b.setAttribute("src", EH_DATA_SHEET_URL + "?gid=" + team.analysisID + "&single=true&range=B5:L14&widget=true&headers=false");
+        b.setAttribute("src", EH_DATA_SHEET_URL + "?gid=" + team.analysisID + "&single=true&range=B5:N14&widget=true&headers=false");
       }
     
     })
@@ -450,7 +450,11 @@ function getFirstMatchForTeam(team, admin) {
 
       matches.reverse();
 
-      addTeamToTable("team" + team.id, team, admin, matches[0].stake);
+      if (matches[0] == null) {
+        addTeamToTable("team" + team.id, team, admin, 0);
+      } else {
+        addTeamToTable("team" + team.id, team, admin, matches[0].stake);
+      }
 
     })
     .catch(function(error) {
