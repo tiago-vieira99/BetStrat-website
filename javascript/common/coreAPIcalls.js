@@ -151,9 +151,9 @@ function callPutUpdateMatch(stratPath, matchId, ftResult) {
     .then(data => {
       console.log(url);
       if (data.status) {
-        alert(data.error + "\n" + data.message);
+        modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
       } else {
-        alert("balance: " + data.balance);
+        modalBox("Match Updated!", "balance: " + data.balance);
         console.log(data);
       }
     })
@@ -171,7 +171,7 @@ function callDeleteMatch(stratPath, matchId) {
     .then(response => response.json())
     .then(data => {
       if (data.status) {
-        alert(data.error + "\n" + data.message);
+        modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
       } else {
         console.log(data);
       }
@@ -228,7 +228,7 @@ function callUpdateTeamAdmin(stratPath, teamId, admin) {
     .then(response => response.json())
     .then(data => {
       if (data.status) {
-        alert(data.error + "\n" + data.message);
+        modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
       } else {
         console.log(data);
       }
@@ -247,7 +247,7 @@ function callUpdateTeamStake(stratPath, teamId, stake) {
     .then(response => response.json())
     .then(data => {
       if (data.status) {
-        alert(data.error + "\n" + data.message);
+        modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
       } else {
         console.log(data);
       }
@@ -266,7 +266,7 @@ function callArchiveTeam(stratPath, teamId) {
     .then(response => response.json())
     .then(data => {
       if (data.status) {
-        alert(data.error + "\n" + data.message);
+        modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
       } else {
         console.log(data);
       }
@@ -283,9 +283,9 @@ function callInsertNewTeam(url) {
   .then(response => response.json())
   .then(data => {
     if (data.status) {
-      alert(data.error + "\n" + data.message);
+      modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
     } else {
-      alert(data.name + " inserted!");
+      modalBox("New Team", data.name + " inserted!");
     }
   })
   .catch((error) => {
@@ -337,9 +337,9 @@ function callPostNewMatch(stratPath, match) {
     .then(response => response.json())
     .then(data => {
       if (data.status) {
-        alert(data.error + "\n" + data.message);
+        modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
       } else {
-        alert("Stake: " + data.stake + "\nSeqLevel: " + data.seqLevel);
+        modalBox("New Match", "<p><b>Stake:</b> " + data.stake + "</p><p><b>SeqLevel:</b> " + data.seqLevel + "</p>");
         console.log(data);
       }
     })
