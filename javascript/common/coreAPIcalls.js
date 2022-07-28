@@ -142,6 +142,9 @@ function callGetAllMatchesInfo(stratPath) {
 }
 
 function callPutUpdateMatch(stratPath, matchId, ftResult) {
+  if (ftResult.includes('+')) {
+    ftResult = ftResult.replace('+', '%2B');
+  }
   var url = "http://" + API_URL + "/api/betstrat/" + stratPath + "/match/" + matchId + "?ftResult=" + ftResult;
 
   fetch(url, {
