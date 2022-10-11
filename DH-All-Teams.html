@@ -7,14 +7,14 @@
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="page_type" content="np-template-header-footer-from-plugin">
-  <title>EH New Team</title>
+  <title>DH All Teams</title>
   <link rel="stylesheet" href="nicepage.css" media="screen">
-  <link rel="stylesheet" href="css/OD-New-Team.css" media="screen">
+  <link rel="stylesheet" href="css/OD-All-Teams.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="javascript/constants.js"></script>
   <script type="text/javascript">
-    var currentStrategy = EURO_HANDICAP_ID;
+    var currentStrategy = DRAWS_HUNTER_ID;
   </script>
   <script class="u-script" type="text/javascript" src="javascript/common/coreAPIcalls.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="javascript/AllTeams.js" defer=""></script>
@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="css/modalDialogBox.css" media="screen">
   <script class="u-script" type="text/javascript" src="javascript/common/modalDialogBox.js" defer=""></script>
 
+
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -32,7 +33,7 @@
     }
   </script>
   <meta name="theme-color" content="#478ac9">
-  <meta property="og:title" content="EH New Team">
+  <meta property="og:title" content="DH All Teams">
   <meta property="og:description" content="">
   <meta property="og:type" content="website">
 </head>
@@ -96,42 +97,78 @@
       <h1 class="u-align-left u-custom-font u-text u-text-default u-text-1"><a href="index.html">BetStrat</a></h1>
     </div>
   </header>
-  <section class="u-align-center u-clearfix u-custom-color-6 u-section-1" id="sec-2a45">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-      <h1 class="u-text u-text-default u-text-1">Insert New Team<p style="font-size: 20px;"><i>Euro Handicap</i></p></h1>
+  <section class="u-clearfix u-custom-color-6 u-section-1" id="carousel_c1f7">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <h2 class="u-text u-text-1">
+        <span style="font-size: 1.125rem; font-weight: 400;">Draws Hunter</span>
+        <br>List of all Teams<br>
+      </h2>
       <span style="font-size: 60px;" onclick="history.back()"><b>&#60;</b></span>
-      <div class="u-form u-form-1">
-        <form class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="custom" name="form">
-          <div class="u-form-group u-form-name u-form-group-1">
-            <label for="name-6797" class="u-form-control-hidden u-label">Name</label>
-            <input type="text" placeholder="Name" id="name-6797" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required="">
-          </div>
-          <div class="u-form-url u-form-group u-form-group-2">
-            <label for="url-6797" class="u-form-control-hidden u-label">Email</label>
-            <input type="text" placeholder="URL" id="url-6797" name="statsUrl" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required="">
-          </div>
-          <div class="u-form-url u-form-group u-form-group-2">
-            <label for="analid-6797" class="u-form-control-hidden u-label">Analysis Code</label>
-            <input type="text" placeholder="Analysis Code" id="analid-6797" name="analysisCode" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required="">
-          </div>
-          <div class="u-form-url u-form-group u-form-group-3">
-            <label for="url-6797" class="u-form-control-hidden u-label">stake</label>
-            <input type="text" placeholder="Initial Stake" id="stake-6797" name="initialStake" class="u-border-1 u-border-grey-30 u-input u-input-rectangle">
-          </div>
-          <div class="u-form-url u-form-group u-form-group-4">
-            <label for="cars">Season:</label>
-            <select id="teamSeason">
-              <option value="--">--</option>
-              <option value="2022">2022</option>
-              <option value="2022-23">2022-23</option>
-              <option value="2023">2023</option>
-            </select>
-          </div>
-          <div class="u-align-left u-form-group u-form-submit u-form-group-3">
-            <a onclick="insertTeam()" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-50">Submit</a>
-            <input type="submit" value="submit" class="u-form-control-hidden">
-          </div>
-        </form>
+      <h2 class="u-text u-text-1" style="margin-top: 0px; margin-right: 0px;">
+        <span style="font-size: 1.125rem; font-weight: 400;">Active Teams</span>
+      </h2>
+      <div class="u-expanded-width u-table u-table-responsive u-table-1" style="margin-top: 20px;">
+        <table class="u-table-entity">
+          <colgroup>
+            <col width="25%">
+            <col width="8%">
+            <col width="8%">
+            <col width="10%">
+            <col width="8%">
+            <col width="8%">
+            <col width="6%">
+            <col width="6%">
+            <col width="15%">
+            <col width="8%">
+          </colgroup>
+          <thead class="u-custom-font u-heading-font u-palette-4-dark-3 u-table-header u-table-header-1">
+            <tr style="height: 70px;">
+              <th class="u-table-cell">TEAM</th>
+              <th class="u-table-cell">enable / disable</th>
+              <th class="u-table-cell">matches played / left</th>
+              <th class="u-table-cell">season</th>
+              <th class="u-table-cell">odd avg</th>
+              <th class="u-table-cell">balance</th>
+              <th class="u-table-cell">roi</th>
+              <th class="u-table-cell">profit goal</th>
+              <th class="u-table-cell">update pg</th>
+              <th class="u-table-cell">archive</th>
+            </tr>
+          </thead>
+          <tbody id="teamsTable" class="u-table-alt-grey-15 u-table-body">
+            <!-- table rows added by jquery -->
+          </tbody>
+        </table>
+      </div>
+      <h2 class="u-text u-text-1">
+        <span style="font-size: 1.125rem; font-weight: 400;">Archived Teams</span>
+      </h2>
+      <div class="u-expanded-width u-table u-table-responsive u-table-1" style="margin-top: 20px;">
+        <table class="u-table-entity">
+          <colgroup>
+            <col width="25%">
+            <col width="12%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+            <col width="6%">
+            <col width="10%">
+          </colgroup>
+          <thead class="u-custom-font u-heading-font u-palette-4-dark-3 u-table-header u-table-header-1">
+            <tr style="height: 70px;">
+              <th class="u-table-cell">TEAM</th>
+              <th class="u-table-cell">matches played</th>
+              <th class="u-table-cell">season</th>
+              <th class="u-table-cell">odd avg</th>
+              <th class="u-table-cell">balance</th>
+              <th class="u-table-cell">profit goal</th>
+              <th class="u-table-cell">roi</th>
+            </tr>
+          </thead>
+          <tbody id="archTeamsTable" class="u-table-alt-grey-15 u-table-body">
+            <!-- table rows added by jquery -->
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -139,19 +176,19 @@
 
   <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-8a43">
     <!-- <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">Amostra de texto. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
-      </div> -->
+      <p class="u-small-text u-text u-text-variant u-text-1">Amostra de texto. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
+    </div> -->
   </footer>
   <section class="u-backlink u-clearfix u-grey-80">
     <!-- <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="https://nicepage.com/html-website-builder" target="_blank">
-        <span>HTML Website Builder</span>
-      </a>. -->
+      <span>Website Templates</span>
+    </a>
+    <p class="u-text">
+      <span>created with</span>
+    </p>
+    <a class="u-link" href="https://nicepage.com/html-website-builder" target="_blank">
+      <span>HTML Website Builder</span>
+    </a>. -->
     <p class="u-text">
       <span>BetStrat - Betting Strategies Advisor </span>
     </p>

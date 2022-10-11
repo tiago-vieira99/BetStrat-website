@@ -3,6 +3,8 @@ if (ONLY_DRAWS_ID == currentStrategy) {
     strategyPath = ONLY_DRAWS_PATH;
 } else if (EURO_HANDICAP_ID == currentStrategy) {
     strategyPath = EURO_HANDICAP_PATH;
+} else if (DRAWS_HUNTER_ID == currentStrategy) {
+  strategyPath = DRAWS_HUNTER_PATH;
 }
 
 const map1 = new Map();

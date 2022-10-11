@@ -5,6 +5,8 @@ const EH_DATA_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRSMl
 const OD_DATA_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTU3oegceHoFnXIXMIdgk16r0uIdaLaLo0fHRTUHunhTN2AxJdLZ2n__Q58Sam5EIaRhe_gsW0YBdua/pubhtml";
 const ONLY_DRAWS_ID = 1;
 const EURO_HANDICAP_ID = 2;
+const DRAWS_HUNTER_ID = 3;
 const ONLY_DRAWS_PATH = "onlydraws";
 const EURO_HANDICAP_PATH = "eurohandicap";
+const DRAWS_HUNTER_PATH = "drawshunter";
 

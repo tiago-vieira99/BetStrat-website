@@ -263,6 +263,8 @@ function callUpdateTeamStake(stratPath, teamId, stake) {
 function callArchiveTeam(stratPath, teamId) {
   var url = "http://" + API_URL + "/api/betstrat/" + stratPath + "/team/archive" + teamId;
 
+  console.log(url);
+
   fetch(url, {
       method: 'PUT', // or 'PUT'
     })
@@ -272,6 +274,7 @@ function callArchiveTeam(stratPath, teamId) {
         modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
       } else {
         console.log(data);
+        modalBox("Archived Team", "<p>OK!</p>");
       }
     })
     .catch((error) => {

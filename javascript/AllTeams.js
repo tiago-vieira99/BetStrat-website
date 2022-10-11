@@ -3,6 +3,8 @@ if (ONLY_DRAWS_ID == currentStrategy) {
     strategyPath = ONLY_DRAWS_PATH;
 } else if (EURO_HANDICAP_ID == currentStrategy) {
     strategyPath = EURO_HANDICAP_PATH;
+} else if (DRAWS_HUNTER_ID == currentStrategy) {
+  strategyPath = DRAWS_HUNTER_PATH;
 }
 
 callGetTeams(strategyPath);
@@ -12,7 +14,7 @@ var currStake;
 
 setTimeout(function() {
   addBtnListeners();
-}, 1000);
+}, 5000);
 
 function addBtnListeners() {
   var allarchiveButtons = document.querySelectorAll('.archiveBtn');
@@ -127,10 +129,15 @@ function toggleConfirmation(tgBtn) {
 function insertTeam() {
     name = document.querySelector('#name-6797').value;
     teamUrl = document.querySelector('#url-6797').value;
-    analysisId = document.querySelector('#analid-6797').value;
     season = document.querySelector('#teamSeason').value;
     stake = document.querySelector('#stake-6797').value;
     var url = null;
+
+    if (DRAWS_HUNTER_ID == currentStrategy) {
+      analysisId = 0;
+    } else {
+      analysisId = document.querySelector('#analid-6797').value;
+    }
 
     if (stake != '') {
       url = new URL("http://" + API_URL + "/api/betstrat/" + strategyPath + "/team?name=name&url=url&season=season&analysisID=analysisID&initialStake=initialStake");

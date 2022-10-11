@@ -4,26 +4,23 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="Only Draws">
   <meta name="description" content="">
   <meta name="page_type" content="np-template-header-footer-from-plugin">
-  <title>OD All Teams</title>
+  <title>Draws Hunter Strategy</title>
   <link rel="stylesheet" href="nicepage.css" media="screen">
-  <link rel="stylesheet" href="css/OD-All-Teams.css" media="screen">
+  <link rel="stylesheet" href="css/Only-Draws.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="javascript/constants.js"></script>
-  <script type="text/javascript">
-    var currentStrategy = ONLY_DRAWS_ID;
-  </script>
+  <script class="u-script" type="text/javascript" src="javascript/constants.js" defer=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script class="u-script" type="text/javascript" src="javascript/common/coreAPIcalls.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="javascript/AllTeams.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="javascript/DrawsHunter.js" defer=""></script>
   <meta name="generator" content="Nicepage 3.24.3, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Federo:400">
   <link rel="stylesheet" href="css/modalDialogBox.css" media="screen">
   <script class="u-script" type="text/javascript" src="javascript/common/modalDialogBox.js" defer=""></script>
-
 
   <script type="application/ld+json">
     {
@@ -33,12 +30,12 @@
     }
   </script>
   <meta name="theme-color" content="#478ac9">
-  <meta property="og:title" content="OD All Teams">
+  <meta property="og:title" content="Only Draws">
   <meta property="og:description" content="">
   <meta property="og:type" content="website">
 </head>
 
-<body class="u-body">
+<body class="u-body u-overlap">
   <header class="u-clearfix u-custom-color-6 u-header u-header" id="sec-2761">
     <div class="u-clearfix u-sheet u-sheet-1">
       <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
@@ -97,78 +94,96 @@
       <h1 class="u-align-left u-custom-font u-text u-text-default u-text-1"><a href="index.html">BetStrat</a></h1>
     </div>
   </header>
-  <section class="u-clearfix u-custom-color-6 u-section-1" id="carousel_c1f7">
+  <section class="u-clearfix u-custom-color-6 u-section-1" id="sec-6de9">
     <div class="u-clearfix u-sheet u-sheet-1">
-      <h2 class="u-text u-text-1">
-        <span style="font-size: 1.125rem; font-weight: 400;">Only Draws</span>
-        <br>List of all Teams<br>
-      </h2>
-      <span style="font-size: 60px;" onclick="history.back()"><b>&#60;</b></span>
-      <h2 class="u-text u-text-1" style="margin-top: 0px; margin-right: 0px;">
-        <span style="font-size: 1.125rem; font-weight: 400;">Active Teams</span>
-      </h2>
-      <div class="u-expanded-width u-table u-table-responsive u-table-1" style="margin-top: 20px;">
-        <table class="u-table-entity">
-          <colgroup>
-            <col width="25%">
-            <col width="8%">
-            <col width="8%">
-            <col width="10%">
-            <col width="8%">
-            <col width="8%">
-            <col width="6%">
-            <col width="6%">
-            <col width="15%">
-            <col width="8%">
-          </colgroup>
-          <thead class="u-custom-font u-heading-font u-palette-4-dark-3 u-table-header u-table-header-1">
-            <tr style="height: 70px;">
-              <th class="u-table-cell">TEAM</th>
-              <th class="u-table-cell">enable / disable</th>
-              <th class="u-table-cell">matches played / left</th>
-              <th class="u-table-cell">season</th>
-              <th class="u-table-cell">odd avg</th>
-              <th class="u-table-cell">balance</th>
-              <th class="u-table-cell">roi</th>
-              <th class="u-table-cell">profit goal</th>
-              <th class="u-table-cell">update pg</th>
-              <th class="u-table-cell">archive</th>
-            </tr>
-          </thead>
-          <tbody id="teamsTable" class="u-table-alt-grey-15 u-table-body">
-            <!-- table rows added by jquery -->
-          </tbody>
-        </table>
+      <div class="u-border-1 u-border-grey-75 u-container-style u-group u-radius-30 u-shape-round u-white u-group-1">
+        <div class="u-container-layout u-container-layout-1">
+          <canvas id="graph" style="max-width:100%; max-height:100%;"></canvas>
+          <form action="#" style="text-align: center; margin-top: 4%;">
+            <label for="lang">Select Season</label>
+            <select id="seasonSelect">
+              <option value="all">All</option>
+              <option value="2021">2021</option>
+              <option value="2021-22">2021/22</option>
+              <option value="2022">2022</option>
+              <option value="2022-23">2022/23</option>
+              <option value="2023">2023</option>
+            </select>
+            <!-- <input type="submit" value="Submit" /> -->
+          </form>
+        </div>
       </div>
-      <h2 class="u-text u-text-1">
-        <span style="font-size: 1.125rem; font-weight: 400;">Archived Teams</span>
-      </h2>
-      <div class="u-expanded-width u-table u-table-responsive u-table-1" style="margin-top: 20px;">
-        <table class="u-table-entity">
-          <colgroup>
-            <col width="25%">
-            <col width="12%">
-            <col width="10%">
-            <col width="10%">
-            <col width="10%">
-            <col width="6%">
-            <col width="10%">
-          </colgroup>
-          <thead class="u-custom-font u-heading-font u-palette-4-dark-3 u-table-header u-table-header-1">
-            <tr style="height: 70px;">
-              <th class="u-table-cell">TEAM</th>
-              <th class="u-table-cell">matches played / left</th>
-              <th class="u-table-cell">season</th>
-              <th class="u-table-cell">odd avg</th>
-              <th class="u-table-cell">balance</th>
-              <th class="u-table-cell">profit goal</th>
-              <th class="u-table-cell">roi</th>
-            </tr>
-          </thead>
-          <tbody id="archTeamsTable" class="u-table-alt-grey-15 u-table-body">
-            <!-- table rows added by jquery -->
-          </tbody>
-        </table>
+    </div>
+  </section>
+  <section class="u-align-center u-clearfix u-palette-4-dark-2 u-section-2" id="sec-3dec">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+      <div class="u-expanded-width u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div class="u-align-center u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-video-cover u-white u-list-item-1">
+            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
+              <h1 id="balance-stat" class="u-align-center u-text u-text-custom-color-7 u-text-1"></span>
+              </h1>
+              <h4 class="u-text u-text-default u-text-2">Balance</h4>
+            </div>
+          </div>
+          <div class="u-align-center u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-video-cover u-white u-list-item-2">
+            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2">
+              <h1 id="success-stat" class="u-align-center u-text u-text-custom-color-7 u-text-3"></span>
+              </h1>
+              <h4 class="u-text u-text-default u-text-4">Success Rate</h4>
+            </div>
+          </div>
+          <div class="u-align-center u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-video-cover u-white u-list-item-3">
+            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
+              <h1 id="numteams-stat" class="u-align-center u-text u-text-custom-color-7 u-text-5"></h1>
+              <h4 class="u-text u-text-default u-text-6">Teams</h4>
+            </div>
+          </div>
+          <div class="u-align-center u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-video-cover u-white u-list-item-4">
+            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-4">
+              <h1 id="nummatches-stat" class="u-align-center u-text u-text-custom-color-7 u-text-7"> </h1>
+              <h4 class="u-text u-text-default u-text-8">Matches Played</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="u-clearfix u-custom-color-6 u-section-3" id="sec-1c17">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div class="u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-1">
+              <a href="DH-Insert-Matches.html" data-page-id="124502278" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-hover-palette-5-dark-1 u-palette-5-dark-2 u-radius-50 u-btn-1">Insert match</a>
+            </div>
+          </div>
+          <div class="u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-2">
+              <a href="DH-All-Matches.html" data-page-id="1768721849" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-hover-palette-5-dark-1 u-palette-5-dark-2 u-radius-50 u-btn-2">Matches History</a>
+            </div>
+          </div>
+          <div class="u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-3">
+              <a href="DH-New-Team.html" data-page-id="183289820" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-hover-palette-5-dark-1 u-palette-5-dark-2 u-radius-50 u-btn-3">Insert team</a>
+            </div>
+          </div>
+          <div class="u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-4">
+              <a href="DH-All-Teams.html" data-page-id="51756114" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-hover-palette-5-dark-1 u-palette-5-dark-2 u-radius-50 u-btn-4">list teams</a>
+            </div>
+          </div>
+          <!-- <div class="u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-4">
+              <a href="OD-Sequence-View.html" data-page-id="51756113" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-hover-palette-5-dark-1 u-palette-5-dark-2 u-radius-50 u-btn-4">sequence view</a>
+            </div>
+          </div> -->
+        </div>
+        <div class="u-container-style u-list-item u-repeater-item">
+          <div class="u-container-layout u-similar-container u-container-layout-4">
+            <a onClick="modalBox('4ng5f4njm53f47', 'body \nbody22');" data-page-id="51756113" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-hover-palette-5-dark-1 u-palette-5-dark-2 u-radius-50 u-btn-4" style="font-size: 230%;">&#8635</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>

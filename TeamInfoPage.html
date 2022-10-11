@@ -84,6 +84,10 @@
                 class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90"
                 href="Euro-Handicap.html" style="padding: 10px 0px;">Euro Handicap</a>
             </li>
+            <li class="u-nav-item"><a
+                class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90"
+                href="Draws-Hunter.html" style="padding: 10px 0px;">Draws Hunter</a>
+            </li>
           </ul>
         </div>
         <div class="u-custom-menu u-nav-container-collapse">
@@ -99,6 +103,9 @@
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Euro-Handicap.html"
                     style="padding: 10px 0px;">Euro Handicap</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Draws-Hunter.html"
+                    style="padding: 10px 0px;">Draws Hunter</a>
                 </li>
               </ul>
             </div>
@@ -116,19 +123,18 @@
         </span>
       </h2>
       <span style="font-size: 60px;" onclick="history.back()"><b>&#60;</b></span>
-      <button type="button" class="collapsible" style = "margin-top: 50px; overflow: hidden;">Show Historic Data Analysis</button>
+      <button type="button" class="collapsible" style="margin-top: 50px; overflow: hidden;">Show Historic Data
+        Analysis</button>
       <div class="content">
-        <iframe class="u-expanded-width teamDataSheet" height="280" frameborder="0" scrolling="no"
-        src=""
-        >
-      </iframe>
+        <iframe class="u-expanded-width teamDataSheet" height="280" frameborder="0" scrolling="no" src="">
+        </iframe>
       </div>
       <script>
         var coll = document.getElementsByClassName("collapsible");
         var i;
-        
+
         for (i = 0; i < coll.length; i++) {
-          coll[i].addEventListener("click", function() {
+          coll[i].addEventListener("click", function () {
             this.classList.toggle("active");
             var content = this.nextElementSibling;
             if (content.style.display === "block") {
@@ -138,9 +144,10 @@
             }
           });
         }
-        </script>
+      </script>
 
-      <canvas id="graphTeam" style="max-width:60%; max-height:20%; background-color: white; width: 70%; margin: 50px auto;"></canvas>
+      <canvas id="graphTeam"
+        style="max-width:60%; max-height:20%; background-color: white; width: 70%; margin: 50px auto;"></canvas>
 
       <div class="u-expanded-width u-table u-table-responsive u-table-1">
         <table class="u-table-entity">
