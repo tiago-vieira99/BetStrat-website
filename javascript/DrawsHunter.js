@@ -4,9 +4,10 @@ var chart;
 
 callGetSeqEvolution(DRAWS_HUNTER_PATH);
 callGetSeqInfo(DRAWS_HUNTER_PATH);
+callGetCandidateTeams();
 
 function syncData() {
-  var url = "http://" + API_URL + "/api/betstrat/drawshunter/sync";
+  var url = "http://" + API_URL + "/api/betstrat/sync";
 
   fetch(url, {
       method: 'POST'
@@ -15,10 +16,12 @@ function syncData() {
 }
 
 function chartSetup(days, profit) {
+  var limitedDaysArray = days.slice(-250);
+  var limitedProfitArray = profit.slice(-250);
   var data = {
     type: 'line',
     data: {
-      labels: days,
+      labels: limitedDaysArray,
       datasets: [{
         backgroundColor: "rgba(220,220,220,0.2)",
         strokeColor: "rgba(220,220,220,1)",
@@ -26,7 +29,7 @@ function chartSetup(days, profit) {
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(220,220,220,1)",
-        data: profit,
+        data: limitedProfitArray,
         fill: true
       }]
     },
@@ -76,5 +79,17 @@ document.getElementById("seasonSelect").addEventListener("change",function() {
   }
 })
 
+
+function addCandidateTeamToTable(team) {
+  $(document).ready(function() {
+    $('#all-candidate-teams-table').append(
+      '<tr style="height: 32px;">' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>-</b></td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">-</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.name + '</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + team.noDrawsCurrentSequence + '</b></td></tr>'
+    );
+  });
+}
 
 

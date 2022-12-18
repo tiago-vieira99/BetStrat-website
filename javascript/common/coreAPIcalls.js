@@ -467,3 +467,141 @@ function getFirstMatchForTeam(team, admin) {
       console.log("Error: " + error);
     });
 }
+
+
+//-------------------------------------------------------------------------------------------
+//-----------------------------       ALL LEAGUES PAGE CALLS     ------------------------------
+//-------------------------------------------------------------------------------------------
+
+function callGetLeagues() {
+  fetch("http://"+API_URL+"/api/league/")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(leagues) {
+      // league = resp.leagues;
+
+      console.log(leagues);
+
+      leagues.sort(function(a, b) {
+        var nameA = a.name,
+          nameB = b.name;
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+
+      leagues.forEach(function(league) {
+        var admin;
+        if (league.admin) {
+          admin = "checked";
+        } else {
+          admin = "";
+        }     
+
+        addLeagueToTable("league" + league.id, league, admin);
+        
+      });
+
+    })
+    .catch(function(error) {
+      console.log("Error: " + error);
+    });
+}
+
+function callGetCandidateTeams() {
+  fetch("http://"+API_URL+"/api/league/teamsInfo")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(teams) {
+      
+      teams.forEach(function(team) {
+        
+        addCandidateTeamToTable(team);
+        
+      });
+
+    })
+    .catch(function(error) {
+      console.log("Error: " + error);
+    });
+}
+
+function callInsertNewLeague(url) {
+  fetch(url, {
+    method: 'POST', // or 'PUT'
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status) {
+      modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
+    } else {
+      modalBox("New League", data.name + " inserted!");
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+function callUpdateLeagueAdmin(leagueId, admin) {
+  var url = "http://" + API_URL + "/api/league/" + leagueId + "?admin=" + admin;
+
+  fetch(url, {
+      method: 'PUT', // or 'PUT'
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status) {
+        modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
+      } else {
+        console.log(data);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+// function callUpdateTeamStake(stratPath, teamId, stake) {
+//   var url = "http://" + API_URL + "/api/betstrat/" + stratPath + "/" + teamId + "?initial_stake=" + stake;
+
+//   fetch(url, {
+//       method: 'PUT', // or 'PUT'
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       if (data.status) {
+//         modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
+//       } else {
+//         console.log(data);
+//       }
+//     })
+//     .catch((error) => {
+//       console.error('Error:', error);
+//     });
+// }
+
+// function callArchiveTeam(stratPath, teamId) {
+//   var url = "http://" + API_URL + "/api/betstrat/" + stratPath + "/team/archive" + teamId;
+
+//   console.log(url);
+
+//   fetch(url, {
+//       method: 'PUT', // or 'PUT'
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       if (data.status) {
+//         modalBox("Error", "<p>" + data.error + "</p><p>" + data.message + "</p>");
+//       } else {
+//         console.log(data);
+//         modalBox("Archived Team", "<p>OK!</p>");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error('Error:', error);
+//     });
+// }
+
