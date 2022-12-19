@@ -484,8 +484,8 @@ function callGetLeagues() {
       console.log(leagues);
 
       leagues.sort(function(a, b) {
-        var nameA = a.name,
-          nameB = b.name;
+        var nameA = a.country,
+          nameB = b.country;
         if (nameA < nameB) return -1;
         if (nameA > nameB) return 1;
         return 0;

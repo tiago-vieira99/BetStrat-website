@@ -52,20 +52,22 @@ function addLeagueToTable(idLeague, league, admin) {
     $(document).ready(function() {
       $('#archLeaguesTable').append(
         '<tr id="' + idLeague + '" style="height: 32px;">' +
-        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + league.name + '</b></td>' +
-        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.country + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.name + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + league.country + '</b></td>' +
         '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.season + '</td>' +
-        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.actualRound + '</td></tr>'
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.actualRound + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.lastUpdate + '</td></tr>'
       );
     });
   } else {
     $(document).ready(function() {
       $('#leaguesTable').append(
         '<tr id="' + idLeague + '" style="height: 32px;">' +
-        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + league.name + '</b></td>' +
-        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.country + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.name + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + league.country + '</b></td>' +
         '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.season + '</td>' +
         '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.actualRound + '</td>' +
+        '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + league.lastUpdate + '</td>' +
         '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><label class="switch"><input id="' + idLeague + '" onclick="toggleButton(this);"  type="checkbox" ' + admin + '><span class="slider round"></span></label></td></tr>'
       );
     });
