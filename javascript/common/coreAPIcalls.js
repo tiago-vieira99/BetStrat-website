@@ -515,6 +515,14 @@ function callGetCandidateTeams() {
       return response.json();
     })
     .then(function(teams) {
+
+      teams.sort(function(a, b) {
+        var nameA = a.teamLeague.country,
+          nameB = b.teamLeague.country;
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
       
       teams.forEach(function(team) {
         

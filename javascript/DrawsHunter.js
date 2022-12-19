@@ -84,9 +84,9 @@ function addCandidateTeamToTable(team) {
   $(document).ready(function() {
     $('#all-candidate-teams-table').append(
       '<tr style="height: 32px;">' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>-</b></td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">-</td>' +
-      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.name + '</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + team.teamLeague.country + '</b></td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.teamLeague.name + '</td>' +
+      '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b><a href="' + team.url + '" <u>' + team.name + '</u></a></b></td>' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + team.noDrawsCurrentSequence + '</b></td></tr>'
     );
   });
