@@ -1,10 +1,22 @@
 var x, y;
 var context = document.querySelector('#graph').getContext('2d');
 var chart;
+var teamsNames;
 
+callGetTeamsNamesList(DRAWS_HUNTER_PATH);
+waitForElement();
 callGetSeqEvolution(DRAWS_HUNTER_PATH);
 callGetSeqInfo(DRAWS_HUNTER_PATH);
-callGetCandidateTeams();
+
+function waitForElement(){
+  if(typeof teamsNames !== "undefined"){
+      //variable exists, do what you want
+      callGetCandidateTeams();
+  }
+  else{
+    setTimeout(waitForElement, 250);
+  }
+}
 
 function syncData() {
   var url = "http://" + API_URL + "/api/betstrat/sync";
@@ -83,13 +95,19 @@ document.getElementById("seasonSelect").addEventListener("change",function() {
 function addCandidateTeamToTable(team) {
   $(document).ready(function() {
     $('#all-candidate-teams-table').append(
-      '<tr style="height: 32px;">' +
+      '<tr style="height: 32px; background-color: '+teamBackgroundColor(team.name)+';">' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + team.teamLeague.country + '</b></td>' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell">' + team.teamLeague.name + '</td>' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b><a href="' + team.url + '" <u>' + team.name + '</u></a></b></td>' +
       '<td class="u-border-1 u-border-grey-40 u-border-no-left u-border-no-right u-table-cell"><b>' + team.noDrawsCurrentSequence + '</b></td></tr>'
     );
   });
+}
+
+function teamBackgroundColor(name) {
+  if (teamsNames.includes(name)) {
+    return '#dadcb9'
+  }
 }
 
 

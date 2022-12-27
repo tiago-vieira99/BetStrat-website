@@ -222,6 +222,28 @@ function callGetTeams(stratPath) {
     });
 }
 
+function callGetTeamsNamesList(stratPath) {
+  fetch("http://"+API_URL+"/api/betstrat/" + stratPath + "/teams")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(resp) {
+      teams = resp.teams;
+
+      var namesArray = [];
+
+      teams.forEach(function(team) {
+        namesArray.push(team.name);
+      });
+
+      teamsNames = namesArray;
+
+    })
+    .catch(function(error) {
+      console.log("Error: " + error);
+    });
+}
+
 function callUpdateTeamAdmin(stratPath, teamId, admin) {
   var url = "http://" + API_URL + "/api/betstrat/" + stratPath + "/" + teamId + "?admin=" + admin;
 
