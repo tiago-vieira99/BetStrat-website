@@ -146,13 +146,8 @@ function insertTeam() {
     teamUrl = document.querySelector('#url-6797').value;
     season = document.querySelector('#teamSeason').value;
     stake = document.querySelector('#stake-6797').value;
+    analysisId = document.querySelector('#analid-6797').value;
     var url = null;
-
-    if (DRAWS_HUNTER_ID == currentStrategy) {
-      analysisId = 0;
-    } else {
-      analysisId = document.querySelector('#analid-6797').value;
-    }
 
     if (stake != '') {
       url = new URL("http://" + API_URL + "/api/betstrat/" + strategyPath + "/team?name=name&url=url&season=season&analysisID=analysisID&initialStake=initialStake");
